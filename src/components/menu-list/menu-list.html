@@ -1,0 +1,26 @@
+<!-- LTR Menu : Overlaying From Left To Right-->
+<ion-menu [content]="mycontent" persistent=true side="right">
+  <ion-header no-border>
+    <ion-toolbar class="side-menu-header" color="dark">
+      <ion-title class="text-center">{{'Menu' | translate }}</ion-title>
+      <button ion-button menuToggle start>
+        <span class="icon-back"></span>
+      </button>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-content>
+    <ion-list>
+      <button class="side-menu-item" menuClose ion-item *ngFor="let p of pages" (tap)="openPage(p)">
+        {{p.title}}
+        <span class="arrow is-right"></span>
+      </button>
+    </ion-list>
+    <language menuClose></language>
+    <currency menuClose></currency>
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #mycontent [swipeBackEnabled]="true"></ion-nav>

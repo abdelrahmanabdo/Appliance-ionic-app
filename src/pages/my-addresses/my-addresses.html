@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="addresses">
+  <div class="page-title">{{'Addresses' | translate}}</div>
+  <div class="address" margin-vertical>
+    <div class="address-header">
+      <h3>{{'Default shipping address' | translate}}</h3>
+    </div>
+
+    <ul class="address-info" *ngIf="defaultShippingAddress">
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'street' | translate}}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.street[0]}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'country' | translate}}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.country_id}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'city' | translate }}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.city}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'region' | translate}}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.region.region}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'telephone' | translate}}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.telephone}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'postcode' | translate}}</h3>
+        <p class="address-info-val">{{defaultShippingAddress.postcode}}</p>
+      </li>
+    </ul>
+    <div class="btn-group" margin-bottom>
+      <button class="text-primary font-weight-bold bg-transparent" (tap)="editAddress(defaultShippingAddress)" *ngIf="userAdresses?.default_shipping">{{'Change shipping address' | translate}}</button>
+      <button class="text-primary font-weight-bold bg-transparent" (tap)="addAddress()" *ngIf="!userAdresses?.default_shipping">{{'Add shipping address' | translate}}</button>
+    </div>
+    <span *ngIf="!defaultShippingAddress">{{'You have no default Shipping address' | translate}}</span>
+  </div>
+  <div class="address" margin-vertical>
+    <div class="address-header">
+      <h3>{{'Default billing address' | translate}}</h3>
+    </div>
+    <ul class="address-info" *ngIf="defaultBillingAddress">
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'street' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.street[0]}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'country' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.country_id}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'city' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.city}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'region' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.region.region}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'telephone' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.telephone}}</p>
+      </li>
+      <li>
+        <h3 class="address-info-title text-capitalize">{{'postcode' | translate}}</h3>
+        <p class="address-info-val">{{defaultBillingAddress.postcode}}</p>
+      </li>
+    </ul>
+    <div class="btn-group" margin-bottom>
+      <button class="text-primary font-weight-bold bg-transparent" (tap)="editAddress(defaultBillingAddress)" *ngIf="userAdresses?.default_billing">{{'Change billing address' | translate}}</button>
+      <button class="text-primary font-weight-bold bg-transparent" (tap)="addAddress()" *ngIf="!userAdresses?.default_billing">{{'Add billing address' | translate}}</button>
+    </div>
+    <span *ngIf="!defaultBillingAddress">{{'You have no default billing address' | translate}}</span>
+  </div>
+  <div *ngIf="(defaultBillingAddress && defaultBillingAddress && userAdresses?.addresses.length > 2) ||
+              (defaultShippingAddress && !defaultBillingAddress && userAdresses?.addresses.length > 1)||
+              (!defaultShippingAddress && defaultBillingAddress && userAdresses?.addresses.length > 1) ||
+              (!defaultShippingAddress && !defaultBillingAddress && userAdresses?.addresses.length === 1)">
+    <div class="categories-container">
+      <div class="address-header">
+        <h3>{{'Addational addresses' | translate}}</h3>
+      </div>
+      <div class="address" *ngFor="let address of userAdresses.addresses ; let index = index">
+        <!-- <div  *ngIf="!(userAdresses.default_shipping && userAdresses.default_shipping !== address.id ) && userAdresses.default_billing !== address.id" class="address-info"> -->
+
+        <ul class="address-info">
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'street' | translate}}</h3>
+            <p class="address-info-val">{{address.street[0]}}</p>
+          </li>
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'country' | translate}}</h3>
+            <p class="address-info-val">{{address.country_id}}</p>
+          </li>
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'city' | translate}}</h3>
+            <p class="address-info-val">{{address.city}}</p>
+          </li>
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'region' | translate}}</h3>
+            <p class="address-info-val">{{address.region.region}}</p>
+          </li>
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'telephone' | translate}}</h3>
+            <p class="address-info-val">{{address.telephone}}</p>
+          </li>
+          <li>
+            <h3 class="address-info-title text-capitalize">{{'postcode' | translate}}</h3>
+            <p class="address-info-val">{{address.postcode}}</p>
+          </li>
+        </ul>
+        <div class="address-header">
+          <div class="btn-group">
+            <button class="text-primary font-weight-bold" (tap)="editAddress(address)">{{'Edit' | translate}}</button>
+            <button class="text-danger font-weight-bold" (tap)="deleteAddress(index)">{{'Delete' | translate}}</button>
+          </div>
+        </div>
+      </div>
+      <!-- </div>. -->
+    </div>
+    <div class="categories-container" *ngIf="userAdresses.length == 0">
+      <h4>{{'There are no shipping addresses yet !' | translate}}</h4>
+    </div>
+  </div>
+  <br>
+  <button class="addresses-addNew" (tap)="addAddress()">{{'Add new address' | translate}}</button>
+
+  <ion-row class="preloader" [hidden]="dataAvaliable" align-items-center justify-content-center>
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>

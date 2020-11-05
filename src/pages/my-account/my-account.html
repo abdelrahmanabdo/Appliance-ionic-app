@@ -1,0 +1,60 @@
+<!--
+  Generated template for the MyAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+	<!-- <ion-title center>{{username}}</ion-title> -->
+    <!-- <button (tap)="back()" ion-button start>
+		<span class="icon-back"></span>
+	</button> -->
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="account"> 
+	<div class="page-title text-white">{{'my dashboard' | translate}}</div>
+	<div class="account-info">
+		<h2 class="text-capitalize">{{username}}</h2>
+		<h2>{{email}}</h2>
+	</div>
+	<ul class="account-list">
+		<li (tap)="GoToMyOrders()">
+			<span class="icon-list"></span>
+			<p>{{'My Orders' | translate}}</p>
+			<span class="arrow is-right"></span>
+		</li>
+		<li (tap)="GoToMywishlist()">
+			<span class="icon-heart-w"></span>
+			<p>{{'My Wishlist' | translate}}</p>
+			<span class="arrow is-right"></span>
+		</li>
+		<li (tap)="GoToMyAddresses()">
+			<span class="icon-id-card"></span>
+			<p>{{'My Addresses' | translate}}</p>
+			<span class="arrow is-right"></span>		
+		</li>
+		<li (tap)="GoToAccountInfo()">
+			<span class="icon-warning"></span>
+			<p>{{'Account Info' | translate}}</p>
+			<span class="arrow is-right"></span>				
+		</li>
+		<li (tap)="logout()">
+			<span class="icon-logout"></span>
+			<p>{{'Logout' | translate}}</p>
+			<span class="arrow is-right"></span>						
+		</li>
+	</ul>
+
+  <!-- <h3 (tap)="GoToMyOrders()">My Orders</h3>
+  <h3 (tap)="GoToMywishlist()">My Wishlist</h3>
+  <h3 (tap)="GoToMyAddresses()">My Addresses</h3>
+  <h3 (tap)="GoToAccountInfo()">Acount Info</h3>
+  <h3 (tap)="logout()">Logout</h3> -->
+</ion-content>

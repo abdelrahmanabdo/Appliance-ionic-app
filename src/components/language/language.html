@@ -1,0 +1,8 @@
+<ion-list no-lines no-margin>
+    <ion-item id="menu_btn" no-margin>
+      <ion-label class="text-capitalize text-gray font-weight-regular">{{"select_language" | translate }}</ion-label>
+      <ion-select [(ngModel)]="languageSelected" (ionChange)='setLanguage()'>
+        <ion-option *ngFor="let item of languages" [selected]="currentLanguage === item.code" [value]="item.code" >{{item.code === 'En' ? 'English' : 'العربية'}}</ion-option>
+      </ion-select>
+    </ion-item>
+</ion-list>

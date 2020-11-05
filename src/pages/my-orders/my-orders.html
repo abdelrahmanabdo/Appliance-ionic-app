@@ -1,0 +1,42 @@
+<!--
+  Generated template for the MyOrdersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="my-orders">
+  <h2 class="page-title">{{'My Orders' | translate}}</h2>
+  <div *ngIf="orders">
+    <div *ngIf="totalOrdersNumber > 0" class="my-orders-list">
+          <div *ngFor="let order of orders" class="order">
+            <div class="order-head">
+              <img  class="order-image" *ngIf="order.items[0].image != undefined"  [src]="server_base_image_url+ order.items[0].image"/>
+              <!-- <img  *ngIf="order.image == undefined"  src="assets/imgs/product.png"/>		 -->
+              <h3 class="order-name">{{order.items[0].name}}</h3>
+			</div>
+            <div class="order-footer">
+				<span (tap)="viewOrder(order)" class="text-primary font-weight-bold text-uppercase">{{'VIEW ORDER DETAILS' | translate}}</span>
+				<h3 class="order-status">{{order.status == "pending_payment" ? "Pending" : order.status}}</h3>
+			</div>
+          </div>
+    </div>
+    <div *ngIf="totalOrdersNumber == 0 ">
+        <h4 class="text-gray text-center">{{'There are no orders' | translate}}</h4>
+    </div>
+  </div>
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+</ion-content>

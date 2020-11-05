@@ -1,0 +1,12 @@
+<ion-content>
+  <div class="welcome-intro">
+    <h1>{{"welcome_to_appliance" | translate}}</h1>
+    <p> {{"welcome_page_headline" | translate}}</p>
+  </div>
+  <div class="welcome-buttons" padding>
+    <p class="text-white text-uppercase text-center font-weight-bold">{{"continue_with" | translate}} :</p>
+    <button class="btn btn-primary email text-uppercase font-weight-bold" ion-button block (tap)="login()">{{"email" | translate}}</button>
+    <user-facebook [userFB]="UsingFacebook" (UserFBEvent)="receiveUserFB($event)"></user-facebook>
+  </div>
+  <h3 class="skipForNow text-white font-weight-bold text-uppercase text-center" (tap)="skip()" margin-vertical>{{"skip_for_now" | translate}}</h3>
+</ion-content>

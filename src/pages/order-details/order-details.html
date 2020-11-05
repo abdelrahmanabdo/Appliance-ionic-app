@@ -1,0 +1,87 @@
+<!--
+  Generated template for the OrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="order-details">
+  <h1 class="page-title">Order Details</h1>
+
+	<div *ngFor="let item of orderDetails.items " class="order">
+		<div class="order-head">
+			<img  class="order-image" *ngIf="item.image != undefined"  [src]="server_base_image_url+ item.image"/>
+			<div class="order-info">
+				<h3 class="order-name">{{item.name}}</h3>
+				<rating [(ngModel)]="rating" readOnly="true" max="5" emptyStarIconName="star" halfStarIconName="star-half" starIconName="star"
+				nullable="false"></rating>
+			</div>
+		</div>
+		<div class="order-footer">
+			<span class="text-primary font-weight-bold text-uppercase"(tap)="navigateToSingleProduct(item.product_type,item.sku)">VIEW product DETAILS</span>
+		</div>
+	</div>
+
+	<ul class="order-details-info">
+		<li class="active">
+			<h4 class="order-details-info-title">order Status</h4>
+			<h4 class="order-details-info-val">{{orderDetails.status}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">order no</h4>
+			<h4 class="order-details-info-val">{{orderDetails.increment_id}} </h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">order quantity</h4>
+			<h4 class="order-details-info-val">{{orderDetails.total_qty_ordered}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">shipping fees</h4>
+			<h4 class="order-details-info-val">{{orderDetails.shipping_amount}} {{orderDetails?.base_currency_code}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">14% vat</h4>
+			<h4 class="order-details-info-val">{{orderDetails.base_tax_amount}} {{orderDetails?.base_currency_code}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">unit price</h4>
+			<h4 class="order-details-info-val">{{orderDetails.subtotal}} {{orderDetails?.base_currency_code}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">Discount amount</h4>
+			<h4 class="order-details-info-val">{{orderDetails.base_discount_amount === -0 ? 0 : orderDetails.base_discount_amount}} {{orderDetails?.base_currency_code}}</h4>
+		</li>
+		<li>
+			<h4 class="order-details-info-title">order Total</h4>
+			<h4 class="order-details-info-val">{{orderDetails.grand_total}} {{orderDetails?.base_currency_code}}</h4>
+		</li>
+	</ul>
+
+  <!-- <div class="review">
+   <span> Write a review</span>
+   <div class="rating">
+    <h5 class="detailsKey">Rating</h5>
+    <rating (ngModelChange)="onRatingChange($event)"class="detailsValue" [(ngModel)]="rating" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" ></rating>
+    <hr>
+    <ion-textarea aria-placeholder="Add review">Add review</ion-textarea><hr>
+    
+    <button ion-button round outline  > ADD REVIEW </button>
+   </div>
+
+
+	</div> -->
+	<ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+</ion-content>

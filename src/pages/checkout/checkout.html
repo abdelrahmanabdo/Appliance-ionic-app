@@ -1,0 +1,231 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <ion-title>checkout</ion-title>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="checkout-content">
+  <div *ngIf="is_logged">
+    <div *ngIf="userAddresses?.length > 0" style="display: flex;flex-direction: column;">
+      <h3 class="sec-title">{{'Shipping address' | translate}}</h3>
+      <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        <div *ngFor="let add of userAddresses ; let index = index" class="categories-container" padding [ngStyle]="{ 'border' : add.id === defaultShippingAddress?.id ? '1px solid blue': ''}" class="addresses" style="flex-basis: 50%;">
+          <h3>{{add?.city}}</h3>
+          <h3>{{add?.street[0]}}</h3>
+          <!-- <h3>{{add?.region.region}}</h3> -->
+          <h3>{{add?.country_id}}</h3>
+          <a [href]="'tel:'+add?.telephone">{{add?.telephone}}</a>
+          <h3>{{add?.postcode}}</h3>
+          <button (tap)="setShippingAddress(add)" class="bg-transparent text-primary text-capitalize">{{"Ship here" | translate}}</button>
+        </div>
+      </div>
+      <h3 class="sec-title">{{'Billing address' | translate}}</h3>
+      <div *ngIf="defaultBillingAddress" class="categories-container" class="addresses" padding-horizontal>
+        <h3>{{defaultBillingAddress?.city}}</h3>
+        <h3>{{defaultBillingAddress?.street[0]}}</h3>
+        <!-- <h3>{{defaultBillingAddress?.region.region  ? defaultBillingAddress?.region.region : defaultBillingAddress?.region}}</h3> -->
+        <h3>{{defaultBillingAddress?.country_id}}</h3>
+        <a [href]="'tel:'+defaultBillingAddress?.telephone">{{defaultBillingAddress?.telephone}}</a>
+        <h3>{{defaultBillingAddress?.postcode}}</h3>
+      </div>
+    </div>
+    <div>
+      <p class="text-gray" *ngIf="userAddresses?.length === 0">{{'There are no shipping addresses yet !' | translate}}</p>
+      <p class="text-primary" (tap)="addNewAddress()">{{'Add new address' | translate}}</p>
+    </div>
+  </div>
+  <div class="row shipping-address" *ngIf="!is_logged">
+    <h3 class="sec-title">{{'Shipping Address' | translate}}</h3>
+    <form class="shipping-address-form" [formGroup]="setShippingAddressForm">
+      <ion-item class="form-control">
+        <ion-label floating>E-mail
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="email" required [(ngModel)]="user.email" formControlName="guestEmail"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestEmail">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestEmail').hasError(validation.type) && (setShippingAddressForm.get('guestEmail').dirty || setShippingAddressForm.get('guestEmail').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <span>{{'You can create an account after checkout.' | translate }}</span>
+
+      <ion-item class="form-control">
+        <ion-label floating>{{'first_name' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" required [(ngModel)]="user.firstname" formControlName="guestFirstName"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestFirstName">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestFirstName').hasError(validation.type) && (setShippingAddressForm.get('guestFirstName').dirty || setShippingAddressForm.get('guestFirstName').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'last_name' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" required [(ngModel)]="user.lastname" formControlName="guestLastName"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestLastName">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestLastName').hasError(validation.type) && (setShippingAddressForm.get('guestLastName').dirty || setShippingAddressForm.get('guestLastName').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'Street Address' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" required [(ngModel)]="user.street[0]" formControlName="guestStreet"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestStreet">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestStreet').hasError(validation.type) && (setShippingAddressForm.get('guestStreet').dirty || setShippingAddressForm.get('guestStreet').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'City' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" required [(ngModel)]="user.city" formControlName="guestCity"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestCity">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestCity').hasError(validation.type) && (setShippingAddressForm.get('guestCity').dirty || setShippingAddressForm.get('guestCity').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'Zip/Postal Code' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" [(ngModel)]="user.postcode" formControlName="guestPostCode"> </ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestPostCode">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestPostCode').hasError(validation.type) && (setShippingAddressForm.get('guestPostCode').dirty || setShippingAddressForm.get('guestPostCode').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'Country' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-select (ionChange)="get_shipping_methods()" [(ngModel)]="user.country_id" class="selectpicker" formControlName="guestCountry" data-style="btn-primary">
+          <ion-option *ngFor="let country of countries" value="{{country.id}}"> {{country.full_name_locale}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestCountry">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestCountry').hasError(validation.type) && (setShippingAddressForm.get('guestCountry').dirty || setShippingAddressForm.get('guestCountry').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item class="form-control">
+        <ion-label floating>{{'Company' | translate}}</ion-label>
+        <ion-input type="text" required [(ngModel)]="user.company" formControlName="guestCompany"> </ion-input>
+      </ion-item>
+      <ion-item class="form-control">
+        <ion-label floating> {{'Phone Number' | translate}}
+          <span class="required"> *</span>
+        </ion-label>
+        <ion-input type="text" required [(ngModel)]="user.telephone" formControlName="guestPhoneNumber"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.guestPhoneNumber">
+          <div class="error-message" *ngIf="setShippingAddressForm.get('guestPhoneNumber').hasError(validation.type) && (setShippingAddressForm.get('guestPhoneNumber').dirty || setShippingAddressForm.get('guestPhoneNumber').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <h3 class="sec-title">{{'Shipping Method' | translate}}
+    <span class="required">*</span>
+  </h3>
+  <div class="row" *ngIf="shippingMethods" class="shippingMethod">
+    <ion-list radio-group [(ngModel)]="selectedShippingMethod" *ngFor="let method of shippingMethods" [hidden]="showShipping" no-margin>
+      <ion-item class="method">
+        <ion-label> {{method.amount*currencyRate}} {{currency}} {{method.carrier_title}}</ion-label>
+        <ion-radio class="item" [value]="method"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div [hidden]="!showShipping">
+    <p class="text-gray" *ngIf="is_logged">{{'Please select Shipping address' | translate}}</p>
+    <p class="text-gray" *ngIf="!is_logged">{{'Please select your country' | translate}}</p>
+  </div>
+  <div class="row" style="margin: 40px 0;">
+    <h3 class="sec-title" no-margin>{{'Discount Coupon' | translate}}</h3>
+    <ion-item class="form-control">
+      <ion-label floating>{{'Have a discount coupon ?' | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="couponValue"></ion-input>
+    </ion-item>
+    <button class="btn btn-outline-primary btn-block apply-coupon" margin-vertical [disabled]="!couponValue" (tap)="apply_coupon()">{{'Apply coupon' | translate}}</button>
+  </div>
+
+  <div [hidden]="showItems" class="cart-list">
+    <ion-card *ngFor="let item of items ; let index = index" class="card">
+      <div class="card-image">
+        <img class="product-image" *ngIf="item.image != undefined" [src]="server_base_image_url+ item.image" />
+        <img class="product-image" *ngIf="item.image == undefined" src="assets/imgs/product.png" /> </div>
+      <div class="card-info">
+        <h3 class="card-name text-capitalize">{{item.name}}</h3>
+        <div class="card-quantity">Qty : {{item.qty }}</div>
+        <h5 class="card-price">{{item.price*currencyRate | number :'1.0'}} {{currency}}</h5>
+      </div>
+      <div class="card-icon">
+      </div>
+    </ion-card>
+    <br>
+    <div *ngIf="totals" class="cart-list-totals">
+      <ul>
+        <li>
+          <h4>{{'Shipping fees' | translate}}</h4>
+          <br>
+          <p *ngIf="totals.base_shipping_amount !== 0 ">{{totals.base_shipping_amount*currencyRate}} {{currency}}</p>
+          <p *ngIf="totals.base_shipping_amount === 0 ">Not calculated yet</p>
+
+        </li>
+        <h6 style="color: #78849E;">{{'Shipping fees will be calculated after adding the address' | translate}}</h6>
+        <li>
+          <h4 class="text-uppercase">{{'14% VAT' | translate}}</h4>
+          <p *ngIf="totals.tax_amount !== 0 ">{{totals.tax_amount*currencyRate}} {{currency}}</p>
+          <p *ngIf="totals.tax_amount === 0 ">Not calculated yet</p>
+        </li>
+        <li *ngIf="totals.discount_amount != 0">
+          <h4>{{'Discount' | translate}}</h4>
+          <p>{{totals.discount_amount*currencyRate}} {{currency}}</p>
+        </li>
+        <li>
+          <h4>{{'Total' | translate}}</h4>
+          <p>{{totals.base_grand_total*currencyRate}} {{currency}}</p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <button class="btn btn-primary btn-block" (tap)="payment_methods()" [disabled]="(!setShippingAddressForm.valid) && (!selectedShippingMethod)">{{'Next' | translate}}</button>
+
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>

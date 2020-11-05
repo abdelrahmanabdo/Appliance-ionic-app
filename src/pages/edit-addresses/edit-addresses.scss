@@ -1,0 +1,75 @@
+page-edit-addresses {
+    @include header($color_white, $color_dark);
+    .categories{
+		&>.scroll-content {
+		  background: linear-gradient(to top, #f2f2f2, $color_white);
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  padding: 0rem 1.6rem;
+		}
+		.page-title{
+			margin-bottom: 1.6rem;
+		}
+		.item, .item-md{
+			background-color: transparent;
+			padding-left: 0px;
+		}
+		.category{
+			min-height: 20rem;
+			border-radius: 1.6rem;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-end;
+			padding: 2.4rem;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			position: relative;
+			margin-bottom: 1.6rem;
+			&-name, &-productsNumber{
+				font-family: $font_montserrat;
+				line-height: 2rem;
+				z-index: 2;
+			}
+			&-name{
+				font-weight: bolder;
+				font-size: 2.4rem;
+				color: $color_white;
+				letter-spacing: 0;
+				line-height: 2.4rem;
+				margin-bottom: 0;
+				text-transform: capitalize;
+			}
+			&-productsNumber{
+				font-size: 1.4rem;
+				font-weight: normal;
+				color: rgba($color_white, 0.72);
+			}
+			&:last-of-type{
+				margin-bottom: 2rem;
+			}
+		}
+	}
+}
+
+
+html[dir="rtl"] page-categories {
+	.header-content{
+		flex-direction: row-reverse;
+	}
+	.toolbar-content{
+		.button{
+			float: left;
+		}
+	}
+  .categories {
+    .category {
+      &-name,
+      &-productsNumber {
+        font-family: $font_cairo;
+      }
+    }
+  }
+}

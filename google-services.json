@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "569258156056",
+    "firebase_url": "https://app-liance-ec68a.firebaseio.com",
+    "project_id": "app-liance-ec68a",
+    "storage_bucket": "app-liance-ec68a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569258156056:android:4466654b9bd37d10",
+        "android_client_info": {
+          "package_name": "com.appliance.info"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569258156056-1n30k3b9oifkbcq1nns0e8d6fard9fkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7ifZLt8x6ypDS5LQlZV74JRSzJfllEN4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

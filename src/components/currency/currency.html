@@ -1,0 +1,8 @@
+<ion-list no-lines no-margin>
+    <ion-item id="menu_btn" no-margin>
+      <ion-label class="text-capitalize text-gray font-weight-regular">{{'Currency' | translate}}</ion-label>
+      <ion-select [(ngModel)]="selectedCurrency" (ionChange)='setCurrency()' [cancelText]="'CANCEL'">
+        <ion-option *ngFor="let currency of currencies" [selected]="currency.currency_to === defaultCurrency" [value]="currency" >{{currency.currency_to}}</ion-option>
+      </ion-select>
+    </ion-item>
+</ion-list>

@@ -1,0 +1,84 @@
+page-account-info {
+  @include header($color_white, $color_dark);
+  .account-info {
+    &>.scroll-content {
+      background: linear-gradient(to top, #f2f2f2, $color_white);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 2.5rem 1.5rem;
+    }
+    .info-item {
+      padding: 0px;
+      background: transparent;
+      .item-inner {
+        padding: 0px;
+      }
+      .label {
+        color: #2A2E43;
+        font-size: 1.7rem;
+        text-align: left;
+        line-height: 2rem;
+        text-transform: capitalize;
+        font-family: $font_montserrat;
+        font-weight: 500;
+      }
+      .text-input {
+        font-size: 1.7rem;
+        font-family: $font_montserrat;
+        font-weight: 500;
+        color: rgba(#2A2E43, 0.45);
+        line-height: 2rem;
+        text-align: right;
+        margin-right: 0px;
+      }
+    }
+    .change-pass-title {
+      font-size: 1.4rem;
+      font-family: $font_montserrat;
+      font-weight: bolder;
+      color: rgba(#78849E, 0.56);
+      text-align: left;
+      line-height: 1.4rem;
+      text-transform: capitalize;
+      margin: 5rem 0 2rem;
+    }
+    .btn-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      button {
+        padding: 3rem 6rem;
+      }
+    }
+  }
+}
+
+html[dir="rtl"] page-account-info {
+  .header-content {
+    flex-direction: row-reverse;
+  }
+  .toolbar-content {
+    text-align: left;
+  }
+  .account-info {
+    .info-item {
+      .label {
+        text-align: right;
+        font-family: $font_cairo;
+      }
+      .text-input {
+        font-family: $font_cairo;
+        text-align: left;
+        margin-right: initial;
+        margin-left: 0px;
+      }
+    }
+    .change-pass-title {
+      font-family: $font_cairo;
+      text-align: right;
+    }
+  }
+}

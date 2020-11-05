@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <ion-title>{{'My Cart' | translate}}</ion-title>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="cart-list">
+  <div [hidden]="showItems">
+    <ion-card *ngFor="let item of items ; let index = index" class="card">
+		<div (tap)="navCtrl.push('ProductSinglePage',{'productSKU':item.sku},{animate: false})" class="card-image">
+      <img class="product-image" *ngIf="item.image != undefined"  [src]="server_base_image_url+ item.image"/>
+      <img class="product-image" *ngIf="item.image == undefined"  src="assets/imgs/product.png"/>		</div> 
+		<div class="card-info">
+			<h5 class="card-price">{{item.price*currencyRate | number :'1.0'}} 
+          <span > {{currency}}</span> 
+      </h5>
+      <h3 class="card-name">{{item.name}}</h3>
+      <div class="row">
+          <!-- <div class="card-quantity">Qty : <ion-input type="number" (change)="showUpdateButton($event.target.value)" [min]=0 [value]="item.qty"> </ion-input></div> -->
+		  <ul class="card-quantity">
+			  <li (tap)="decreaseQuantity(item , index)">
+				  <ion-icon name="remove" ></ion-icon>
+			  </li>
+			  <li [id]="'quantity-'+item.item_id">{{item.qty}}</li>
+			  <li (tap)="increaseQuantity(item , index)">
+				  <ion-icon name="add" ></ion-icon>
+			  </li>
+		  </ul>
+
+      </div>
+      <!-- <div class="card-quantity">SKU : {{item.sku}} </div> -->
+      <button *ngIf="updateCartFlag" (tap)="updateCart(item)">{{'Update' | translate}}</button>
+		</div>
+		<div class="card-icon">
+			<span class="icon-wrong" (tap)="removeFromCart(item.item_id,index)"></span>
+		</div>
+
+      <!-- <div class="card-title">{{item.name}}</div>
+      <div class="card-price">${{item.price | number :'1.2'}}</div>
+      <div class="card-quantity">Qty : {{item.qty }}</div>
+      <div class="card-quantity">SKU : {{item.sku}} </div>
+      <img src={{item.image}}/>
+      
+      <ion-input type="number" (change)="showUpdateButton($event.target.value)" [min]=0 [value]="item.qty"> </ion-input>
+      <button *ngIf="updateCartFlag" (tap)="updateCart(item)">Update</button>
+      <span style="float:right;width: 20px ; height: 20px ; border-radius: 50%; background: red" (tap)="removeFromCart(item.item_id,index)">X</span> -->
+    </ion-card>
+    <div *ngIf="totals" class="cart-list-totals">
+		<ul>
+			<li>
+        <h4>{{'Shipping fees' | translate}}</h4><br>
+        <p *ngIf="totals.base_shipping_amount !== 0 ">{{totals.base_shipping_amount*currencyRate}} {{currency}}</p>
+        <p *ngIf="totals.base_shipping_amount === 0 ">Not calculated yet</p>
+        
+      </li>
+      <h6>{{'Shipping fees will be calculated after adding the address' | translate}}</h6>
+
+			<li>
+				<h4 class="text-uppercase">{{'14% VAT' |  translate}}</h4>
+        <p *ngIf="totals.tax_amount !== 0 ">{{totals.tax_amount*currencyRate}} {{currency}}</p>
+        <p *ngIf="totals.tax_amount === 0 ">Not calculated yet</p>
+			</li>
+			<li *ngIf="totals.discount_amount != 0">
+				<h4>{{'Discount' | translate}}</h4>
+				<p>{{totals.discount_amount*currencyRate}} {{currency}}</p>
+			</li>
+			<li>
+				<h4>{{'Total' | translate}}</h4>
+				<p>{{totals.base_grand_total*currencyRate}} {{currency}}</p>
+			</li>
+		</ul>
+    </div>
+    <button (tap)="checkout()" [hidden]="showCheckout" class="btn btn-primary font-weight-bold">{{'Continue to checkout' | translate}}</button>
+
+  </div>
+  <div [hidden]="!showItems">
+    <h4 class="text-gray text-center">{{'There are no items' | translate}}</h4>
+    <h4 class="text-primary text-center" (tap)="navCtrl.push('CategoriesPage',{animate: false})">{{'ShopNow' | translate}}</h4>
+
+  </div>
+
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+</ion-content>

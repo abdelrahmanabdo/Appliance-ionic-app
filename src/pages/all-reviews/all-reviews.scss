@@ -1,0 +1,179 @@
+page-all-reviews {
+  @include header($color_white, $color_dark);
+  .reviews {
+    &>.scroll-content {
+      background: linear-gradient(to top, #f2f2f2, $color_white);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 0px 1.6rem 2.5rem 1.6rem;
+    }
+    &-title {
+      color: #454F63;
+      font-family: $font_montserrat;
+      font-weight: bolder;
+      text-align: left;
+      font-size: 4rem;
+	  margin-bottom: 2.2rem;
+	  margin-top: 0px;
+    }
+    .addresses {
+      display: flex;
+      flex-direction: column;
+      &-addNew {
+        margin-top: 3rem;
+        font-size: 1.6rem;
+        text-align: left;
+        line-height: 1.6rem;
+        font-family: $font_montserrat;
+        font-weight: 500;
+        color: $color_blue;
+        background-color: transparent;
+      }
+    }
+    .review {
+      margin: 1.3rem 0;
+      &-card {
+        background-color: $color_white;
+        border-radius: 1.2rem;
+        box-shadow: 0px 0.5333rem 2rem rgba(#455B63, 0.2) !important;
+        width: 100%;
+        padding: 1.9rem 1.4rem;
+        margin: 1rem 0 !important;
+        rating {
+          .rating {
+            padding: 0px !important;
+          }
+        }
+      }
+      &-info {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        &-user {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          flex: 1;
+          &>div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+          }
+        }
+      }
+      &-img-container {
+        width: 4.6rem;
+        height: 4.6rem;
+        overflow: hidden;
+        border-radius: 1.2rem;
+        border: 1px solid $color_darkGray;
+        background-color: $color_white;
+        margin-right: 1.6rem;
+        img {
+          object-fit: contain;
+        }
+      }
+      &-name {
+        font-size: 1.6rem;
+        text-align: left;
+        line-height: 1.9rem;
+        font-family: $font_montserrat;
+        font-weight: bolder;
+        color: $color_dark;
+      }
+      &-date {
+        font-family: $font_montserrat;
+        font-weight: normal;
+        text-align: right;
+        line-height: 1.5rem;
+        font-size: 1.2rem;
+        color: #797979;
+      }
+      &-text {
+        font-family: $font_montserrat;
+        font-weight: 500;
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+        text-align: left;
+        color: #797979;
+        white-space: pre-line;
+        margin: 2rem 0 0;
+        min-height: 5rem;
+      }
+    }
+  }
+  rating {
+    width: 100%;
+    .rating {
+      width: 100%;
+      padding: 0 1.6rem;
+      margin: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      li {
+        padding: 0rem 0.3rem !important;
+        font-size: 2rem;
+        &:first-of-type {
+          padding-left: 0px !important;
+        }
+        &:last-of-type {
+          padding-right: 0px !important;
+        }
+        .icon {
+          color: #FFB900;
+        }
+      }
+    }
+  }
+}
+
+html[dir="rtl"] page-all-reviews {
+	.header-content {
+	  flex-direction: row-reverse;
+	}
+
+	.toolbar-content {
+	  text-align: left;
+	}
+  .reviews {
+    &-title {
+      font-family: $font_cairo;
+      text-align: right;
+    }
+    .review {
+      &-name {
+        text-align: right;
+        font-family: $font_cairo;
+      }
+      &-date {
+        font-family: $font_cairo;
+        text-align: left;
+      }
+      &-text {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+    }
+  }
+  rating {
+    .rating {
+      li {
+        &:first-of-type {
+          padding-left: initial !important;
+          padding-right: 0px !important;
+        }
+        &:last-of-type {
+          padding-right: initial !important;
+          padding-left: 0px !important;
+        }
+      }
+    }
+  }
+}

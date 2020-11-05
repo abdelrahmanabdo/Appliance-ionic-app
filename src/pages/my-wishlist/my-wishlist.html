@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="wishlist">
+  <div class="page-title">{{'my wishlist' | translate}}</div>
+
+  <div *ngIf="wishlist">
+    <div *ngIf="wishlist.length > 0">
+    <ion-card *ngFor="let item of wishlist ; let index = index" class="wishCard card">
+      <div class="card-body">
+        <img *ngIf="item.product.image != undefined" [src]="server_base_image_url+item.product.image" />
+        <img *ngIf="item.product.image == undefined" src="assets/imgs/product.png" />
+
+        <div class="card-info">
+            <h4 class="card-info-name">{{item.product.name | slice:0:40}} <span *ngIf="item.product.name .length >= 40">...</span></h4>
+          <div class="card-info-price">
+            <h5 class="card-price">{{item.product.price*currencyRate | number :'1.0'}} {{currency}} </h5>
+            <span class="icon-wrong" (tap)="removeFromWishlist(item.wishlist_item_id,index)"></span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button (tap)="wishlistAddTocart(item.product.sku)">
+		  <span class="icon-cart"></span>
+		  {{'Add to cart' | translate}}
+		</button>
+		<span class="text-primary font-weight-bold text-uppercase" (tap)="viewProduct(item.product.sku)">{{'VIEW product' | translate}}</span>
+      </div>
+      <!-- <img [src]="server_base_image_url+item.product.image" /> {{item.name}}
+      <div class="card-title">{{item.product.name}}</div>
+      <div class="card-price">${{item.product.price | number :'1.2'}}</div>
+      <span style="float:right;width: 20px ; height: 20px ; border-radius: 50%; background: red" (tap)="removeFromWishlist(item.wishlist_item_id,index)">X</span>
+      <button style="padding: 10px;" (tap)="wishlistAddTocart(item.product.sku)">Add to cart</button> -->
+    </ion-card>
+    </div> 
+    <div *ngIf="wishlist.length == 0">
+      <h4 class="text-gray text-center">{{'There are no items' | translate}}</h4>
+    </div>
+  </div>
+
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+</ion-content>

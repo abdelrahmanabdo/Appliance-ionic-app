@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar class="header-content">
+      <button ion-button menuToggle end>
+        <span class="icon-menu"></span>
+      </button>
+      <button (tap)="back()" ion-button start>
+        <span class="icon-back"></span>
+      </button>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="account-info">
+    <div *ngIf="userData"> 
+      <div class="page-title">{{"Account_Info"| translate}}</div>
+      <form [formGroup]="updateUserData">
+      <ion-item class="info-item">
+          <ion-label>{{"first_name" | translate}} <span class="required" >*</span></ion-label>
+          <ion-input [value]="userData.firstname" [(ngModel)]="userData.firstname" (ionChange)="enableSaveButton()"  formControlName="firstname"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.firstname">
+            <div class="error-message" *ngIf="updateUserData.get('firstname').hasError(validation.type) && (updateUserData.get('firstname').dirty || updateUserData.get('firstname').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item class="info-item">
+            <ion-label>{{"last_name" | translate}} <span class="required" >*</span></ion-label>
+            <ion-input [value]="userData.lastname" [(ngModel)]="userData.lastname"  (ionChange)="enableSaveButton()" formControlName="lastname"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.lastname">
+            <div class="error-message" *ngIf="updateUserData.get('lastname').hasError(validation.type) && (updateUserData.get('lastname').dirty || updateUserData.get('lastname').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item class="info-item">
+      <ion-label>{{"email" | translate}} <span class="required" >*</span></ion-label>
+         <ion-input [value]="userData.email" [(ngModel)]="userData.email" (ionChange)="enableSaveButton()" formControlName="email"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message" *ngIf="updateUserData.get('email').hasError(validation.type) && (updateUserData.get('email').dirty || updateUserData.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+            <h5 class="change-pass-title">{{"change_password" | translate}}</h5>
+      <ion-item class="info-item">
+        <ion-label>{{"old_password" | translate}} <span class="required" >*</span></ion-label>
+        <ion-input type="password"  formControlName="oldPassword"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.oldPassword">
+            <div class="error-message" *ngIf="updateUserData.get('oldPassword').hasError(validation.type) && (updateUserData.get('oldPassword').dirty || updateUserData.get('oldPassword').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item class="info-item">
+          <ion-label>{{"new_password" | translate}} <span class="required" >*</span></ion-label>
+          <ion-input type="password" [(ngModel)]="userData.password" formControlName="newPassword"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.newPassword">
+            <div class="error-message" *ngIf="updateUserData.get('newPassword').hasError(validation.type) && (updateUserData.get('newPassword').dirty || updateUserData.get('newPassword').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item class="info-item">
+            <ion-label>{{"confirm_new_password" | translate}}</ion-label> <span class="required" >*</span>
+            <ion-input type="password" formControlName="confirmNewPassword"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.newPassword">
+            <div class="error-message" *ngIf="updateUserData.get('confirmNewPassword').hasError(validation.type) && (updateUserData.get('confirmNewPassword').dirty || updateUserData.get('confirmNewPassword').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="validation-errors" >
+            <div class="error-message" *ngIf="updateUserData.get('confirmNewPassword').touched && updateUserData.hasError('mismatchedPasswords') && updateUserData.get('newPassword').valid" >
+                {{"Mismatch password" | translate}}
+            </div>
+        </div>
+          <div class="btn-group">
+            <button class="btn btn-outline-primary" ion-button round outline type="submit" [disabled]="!updateUserData" (tap)="navCtrl.pop()">{{"cancel" | translate}}</button>
+            <button class="btn btn-primary" ion-button round outline type="submit" (tap)="update(updateUserData.value)" [disabled]='(updateUserData.value.newPassword) && (updateUserData.value.newPassword != updateUserData.value.confirmNewPassword) || !enableButton'>{{"save" | translate}}</button>
+          </div>
+      </form>
+        </div>
+        <ion-row [hidden]="dataAvilable" align-items-center justify-content-center class="preloader">
+          <img src="assets/imgs/preloader.gif">
+        </ion-row>
+</ion-content>

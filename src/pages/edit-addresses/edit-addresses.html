@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="categories">
+
+  <div class="page-title">{{"Edit address" | translate}}</div>
+  <form [formGroup]="addressEditForm">
+    <ion-item>
+      <ion-label floating>{{'Street' | translate}}</ion-label>
+      <ion-input type="text" [value]="oldAdress.street[0]" formControlName="street"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of edit_validation_messages.street">
+        <div class="error-message" *ngIf="addressEditForm.get('street').hasError(validation.type) && (addressEditForm.get('street').dirty || addressEditForm.get('street').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label floating="">{{'City' | translate}}</ion-label>
+      <ion-input type="text" [value]="oldAdress.city" formControlName="city"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of edit_validation_messages.city">
+        <div class="error-message" *ngIf="addressEditForm.get('city').hasError(validation.type) && (addressEditForm.get('city').dirty || addressEditForm.get('city').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label floating="">{{'Region' | translate}}</ion-label>
+      <ion-input type="text" [value]="oldAdress.region.region" formControlName="region"></ion-input>
+    </ion-item>
+    <ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of edit_validation_messages.region">
+          <div class="error-message" *ngIf="addressEditForm.get('region').hasError(validation.type) && (addressEditForm.get('region').dirty || addressEditForm.get('region').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-label floating="">{{'Country' | translate}}</ion-label>
+
+      <ion-select formControlName="countryId">
+        <ion-option *ngFor="let Country of countries" [selected]="oldAdress.country_id == Country.id" [value]="Country.id" [translate]="Country.full_name_english"></ion-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of edit_validation_messages.countryId">
+        <div class="error-message" *ngIf="addressEditForm.get('countryId').hasError(validation.type) && (addressEditForm.get('countryId').dirty || addressEditForm.get('countryId').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label floating="">{{'telephone' | translate}}</ion-label>
+      <ion-input type="text" [value]="oldAdress.telephone" formControlName="telephone"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of edit_validation_messages.telephone">
+        <div class="error-message" *ngIf="addressEditForm.get('telephone').hasError(validation.type) && (addressEditForm.get('telephone').dirty || addressEditForm.get('telephone').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-label floating=""> {{'postcode' | translate}}</ion-label>
+      <ion-input type="text" [value]="oldAdress.postcode" formControlName="postcode"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of edit_validation_messages.street">
+        <div class="error-message" *ngIf="addressEditForm.get('postcode').hasError(validation.type) && (addressEditForm.get('postcode').dirty || addressEditForm.get('postcode').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <button class="btn btn-primary mx-auto btn-block" type="submit" margin-vertical ion-button round outline [disabled]="!addressEditForm" (tap)="editAddress(addressEditForm.value)">{{'Edit' | translate}}</button>
+  </form>
+
+  <ion-row class="preloader" [hidden]="dataAvaliable" align-items-center justify-content-center>
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>

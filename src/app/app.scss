@@ -1,0 +1,714 @@
+///////////////////////////////////////////////// Variables /////////////////////////////////////////////////
+// Colors
+$color_white: #fff;
+$color_blue: #3a94e1;
+$color_fb: #3B5998;
+$color_red: #C11F1F;
+$color_dark: #2A2E43;
+$color_darkGray: #8E8E93;
+// Fonts
+$font_montserrat: 'Montserrat',
+sans-serif;
+$font_cairo: "Cairo",
+sans-serif;
+///////////////////////////////////////////////// End Variables /////////////////////////////////////////////////
+///////////////////////////////////////////////// Icon Fonts /////////////////////////////////////////////////
+@font-face {
+  font-family: 'icomoon';
+  src: url('../assets/fonts/icomoon.eot?dxxj5o');
+  src: url('../assets/fonts/icomoon.eot?dxxj5o#iefix') format('embedded-opentype'), url('../assets/fonts/icomoon.ttf?dxxj5o') format('truetype'), url('../assets/fonts/icomoon.woff?dxxj5o') format('woff'), url('../assets/fonts/icomoon.svg?dxxj5o#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Ionicons', 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-icons-general {
+  display: inline-block;
+  font: normal normal normal 14px/1 'Ionicons', 'icomoon';
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
+
+.ion-ios-icon-notifications::before,
+.ion-ios-icon-notifications-outline::before,
+.ion-md-icon-notifications::before {
+  @extend .fa-icons-general;
+  content: "\e90a";
+  margin-top: 5px;
+}
+
+.ion-ios-icon-compare::before,
+.ion-ios-icon-compare-outline::before,
+.ion-md-icon-compare::before {
+  @extend .fa-icons-general;
+  content: "\e903";
+  margin-top: 5px;
+}
+
+.ion-ios-icon-cart::before,
+.ion-ios-icon-cart-outline::before,
+.ion-md-icon-cart::before {
+  @extend .fa-icons-general;
+  content: "\e902";
+  margin-top: 5px;
+}
+
+.tab-button {
+  .tab-badge {
+    background-color: $color_red !important;
+    color: $color_white !important;
+    border-radius: 50%;
+    font-size: 10px;
+  }
+}
+
+.tabs-md .tab-button,
+.tabs-ios .tab-button {
+  min-height: 5rem;
+}
+
+.icon-share:before {
+  content: "\e910";
+  color: #78849e;
+}
+
+.icon-back:before {
+  content: "\e900";
+}
+
+// html[dir="rtl"] .icon-back{
+// 	transform: rotate(180deg);
+// }
+.icon-back-w:before {
+  content: "\e901";
+  color: #fff;
+}
+
+// html[dir="rtl"] .icon-back-w {
+//   transform: rotate(180deg);
+// }
+.icon-cart:before {
+  content: "\e902";
+}
+
+.icon-compare:before {
+  content: "\e903";
+}
+
+.icon-warning:before {
+  content: "\e904";
+  color: #fff;
+}
+
+.icon-id-card:before {
+  content: "\e905";
+  color: #fff;
+}
+
+.icon-list:before {
+  content: "\e906";
+  color: #fff;
+}
+
+.icon-logout:before {
+  content: "\e907";
+  color: #fff;
+}
+
+.icon-menu:before {
+  content: "\e908";
+}
+
+.icon-menu-w:before {
+  content: "\e909";
+  color: #fff;
+}
+
+.icon-notifications:before {
+  content: "\e90a";
+}
+
+.icon-cart-gray:before {
+  content: "\e90b";
+  color: #78849e;
+}
+
+.icon-wrong:before {
+  content: "\e90c";
+  color: #931414;
+}
+
+.icon-heart-w:before {
+  content: "\e90d";
+  color: #fff;
+}
+
+.icon-heart:before {
+  content: "\e90e";
+  color: #78849e;
+}
+
+.icon-Search:before {
+  content: "\e90f";
+}
+
+///////////////////////////////////////////////// End Icon Fonts /////////////////////////////////////////////////
+///////////////////////////////////////////////// Mixins /////////////////////////////////////////////////
+@mixin rotate($angle) {
+  -moz-transform: rotate($angle);
+  -ms-transform: rotate($angle);
+  -webkit-transform: rotate($angle);
+  transform: rotate($angle);
+}
+
+@mixin arrow($arrowSize: 1rem,
+$arrowBorderSize: 0.3rem,
+$arrowBarWidth: 0.2rem,
+$arrowBarHeight: 2.5rem) {
+  display: inline-block;
+  height: $arrowSize;
+  position: relative;
+  width: $arrowSize;
+  &::after {
+    border-bottom-style: solid;
+    border-bottom-width: $arrowBorderSize;
+    border-right-style: solid;
+    border-right-width: $arrowBorderSize;
+    content: "";
+    display: inline-block;
+    height: $arrowSize;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: $arrowSize;
+  } // Triangle shape state
+  &.is-triangle::after {
+    border-style: solid;
+    border-width: 0 0 $arrowSize $arrowSize;
+    height: 0;
+    width: 0;
+  } // Check shape state
+  &.is-check::after {
+    width: $arrowSize / 2;
+  } // Arrow Bar
+  &.arrow-bar::before {
+    bottom: 1px;
+    content: "";
+    height: $arrowBarHeight;
+    position: absolute;
+    right: 0;
+    transform-origin: bottom;
+    width: $arrowBarWidth;
+    @include rotate(-45deg);
+  } // States
+  &.is-top {
+    @include rotate(225deg);
+  }
+  &.is-right {
+    @include rotate(315deg);
+  }
+  &.is-bottom {
+    @include rotate(45deg);
+  }
+  &.is-left {
+    @include rotate(135deg);
+  }
+  [dir="rtl"] &.is-right {
+    @include rotate(135deg);
+  }
+  [dir="ltr"] &.is-left {
+    @include rotate(315deg);
+  }
+}
+
+@mixin arrowColor($color) {
+  &,
+  .arrow {
+    &::after {
+      border-color: $color;
+    }
+    &.is-triangle::after {
+      border-color: transparent;
+      border-bottom-color: $color;
+    }
+    &::before {
+      background-color: $color;
+    }
+  }
+}
+
+.arrow {
+  @include arrow(1rem,
+  0.2rem);
+  @include arrowColor($color_blue);
+  right: 0.5rem;
+}
+
+html[dir="rtl"] .arrow {
+  //   @include arrow(1rem,
+  //   0.2rem);
+  //   @include arrowColor($color_blue);
+  right: initial !important;
+  left: 0.5rem !important;
+}
+
+//header mixin
+// title value if the header have title in center between two icons
+@mixin header($bgColor,
+$color,
+$title: false) {
+  .header {
+    border: 0 !important;
+    &::after {
+      background-image: none !important;
+    }
+    .toolbar-background {
+      background: $bgColor;
+      border: 0 !important;
+    }
+    .toolbar-title {
+      font-size: 2rem;
+      text-align: center;
+      font-family: $font_montserrat;
+      font-weight: 400;
+      line-height: 2.4rem;
+      text-transform: capitalize;
+      color: $color_white;
+    }
+    @if $title==true {
+      .toolbar {
+        &-content {
+          display: flex;
+          flex-direction: row-reverse;
+          text-align: center;
+          &-ios {
+            flex-direction: row !important;
+          }
+        }
+        &-title {
+          font-family: $font_montserrat;
+          font-weight: normal;
+          text-align: center;
+          line-height: 2.4rem;
+          font-size: 2rem;
+          text-transform: capitalize;
+		  &-ios{
+			  padding-top: 10px;
+		  }
+        }
+      }
+    }
+    &-content {
+      color: $color;
+      background: $bgColor;
+      padding: 1rem 0.4rem;
+      button.button-md,
+      button.button-ios {
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 11px !important;
+      }
+      span[class^="icon"] {
+        color: $color;
+        font-size: 2.5rem;
+      }
+    }
+    .button-md:hover:not(.disable-hover) {
+      background-color: transparent;
+    }
+  }
+}
+
+///////////////////////////////////////////////// End Mixins /////////////////////////////////////////////////
+///////////////////////////////////////////////// General Style /////////////////////////////////////////////////
+html {
+  font-size: 10px;
+  font-family: $font_montserrat;
+}
+
+html[dir="rtl"] {
+  &>* {
+    font-family: $font_cairo;
+  }
+}
+
+// classes
+.text-white {
+  color: $color_white !important;
+  font-family: $font_montserrat;
+}
+
+html[dir="rtl"] .text-white {
+  font-family: $font_cairo;
+}
+
+.text-primary {
+  color: $color_blue !important;
+  font-family: $font_montserrat;
+}
+
+html [dir="rtl"] .text-primary {
+  font-family: $font_cairo;
+}
+
+.text-dark {
+  color: $color_dark !important;
+  font-family: $font_montserrat;
+}
+
+html[dir="rtl"] .text-dark {
+  font-family: $font_cairo;
+}
+
+.text-gray {
+  color: #B1B1B1 !important;
+  font-family: $font_montserrat;
+}
+
+html[dir="rtl"] .text-gray {
+  font-family: $font_cairo;
+}
+
+.text-danger {
+  color: #931414 !important;
+  font-family: $font_montserrat;
+}
+html[dir="rtl"] .text-danger {
+  font-family: $font_cairo;
+}
+.font-weight-bold {
+  font-weight: bold !important;
+}
+.font-weight-light {
+  font-weight: 200 !important;
+}
+.font-weight-regular{
+	font-weight: 500 !important;
+}
+.text-left {
+  text-align: left !important;
+}
+html[dir="rtl"].text-left {
+  text-align: right !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+html[dir="rtl"].text-right {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.shadow-0 {
+  box-shadow: none !important;
+}
+
+.mx-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+// buttons
+.btn {
+  box-shadow: none;
+  border: 0px;
+  border-radius: 16px !important;
+  padding: 20px 0 !important;
+  font-size: 1.5rem !important;
+  font-family: $font_montserrat;
+  font-weight: bold;
+  border: 1px solid transparent;
+  text-align: center;
+  width: 90%;
+  .input-inner {
+    font-family: $font_montserrat;
+  }
+}
+
+html[dir="rtl"] .btn {
+  font-family: $font_cairo;
+  .input-inner {
+    font-family: $font_cairo;
+  }
+}
+
+.btn-primary {
+  background-color: $color_blue;
+  color: $color_white;
+  border-color: $color_blue;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-outline-primary {
+  background: transparent;
+  border: 1px solid $color_blue;
+  color: $color_blue;
+}
+
+.btn-outline-white {
+  background: transparent;
+  border: 1px solid $color_white;
+  color: $color_white;
+}
+
+.btn-facebook {
+  background-color: $color_fb;
+  color: $color_white;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.toolbar-background-md {
+  background-color: #312d45
+}
+
+ion-header {
+  background-color: #312d45;
+}
+
+.bar-button-menutoggle {
+  color: white;
+}
+
+.toolbar-title {
+  color: white;
+}
+
+ion-title {
+  text-align: center;
+}
+
+.menu-inner {
+  width: 100%;
+}
+
+.menuCloseButton {
+  color: white;
+  margin: 10px;
+}
+
+.page-title {
+  color: #454F63;
+  font-family: $font_montserrat;
+  font-weight: bolder;
+  text-align: left;
+  font-size: 4rem;
+  margin-bottom: 0;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+html[dir="rtl"] .page-title {
+  text-align: right;
+  font-family: $font_cairo;
+}
+
+html[dir="rtl"] .page-subtitle {
+  text-align: right;
+  font-family: $font_cairo;
+}
+
+.page-subtitle {
+  color: #78849E;
+  font-size: 1.2rem;
+  text-align: left;
+  line-height: 1.5rem;
+  font-family: $font_montserrat;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.page-sort-filter {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    color: #3A94E1;
+    font-size: 1.6rem;
+    line-height: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    margin: 2rem 0;
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+  [dir="rtl"]a {
+    font-family: $font_cairo;
+  }
+}
+
+.sec-title {
+  font-size: 1.5rem;
+  text-align: left;
+  color: rgba(#78849E, 0.56);
+  margin-bottom: 15px;
+  font-family: $font_montserrat;
+  font-weight: 800;
+  line-height: 1.4rem;
+  text-transform: capitalize;
+}
+
+html[dir="rtl"] .sec-title {
+  font-family: $font_cairo;
+  text-align: right;
+}
+
+.bg-filter {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(42, 46, 67, 0.36)), to(rgba(42, 46, 67, 0.36)));
+    background-image: linear-gradient(to top, rgba(42, 46, 67, 0.36), rgba(42, 46, 67, 0.36));
+    width: 100%;
+    height: 100%;
+    border-radius: 1.6rem;
+    z-index: 1;
+  }
+}
+
+[dir="rtl"] .bg-filter {
+  &::after {
+    left: initial;
+    right: 0;
+  }
+}
+
+.preloader {
+  z-index: 99999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; // background: rgba(#000, 0.4);
+  background: white;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+rating {
+  width: 100%;
+  .rating {
+    width: 100%;
+    padding: 0 1.6rem;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    li {
+      padding: 0rem 0.3rem !important;
+      font-size: 1.8rem;
+      &:first-of-type {
+        padding-left: 0px !important;
+      }
+      &:last-of-type {
+        padding-right: 0px !important;
+      }
+      .icon {
+        color: #FFB900;
+        &[ng-reflect-name="star-outline"] {
+          color: #D5D7DB;
+          &::before {
+            content: "\f384";
+          }
+        }
+      }
+    }
+  }
+}
+
+.toast {
+  &-message {
+    color: $color_white;
+    font-family: $font_montserrat !important;
+    font-size: 1.8rem !important;
+  }
+  &-wrapper {
+    // border-radius: 12px;
+    opacity: 0.9;
+    background: $color_blue !important;
+    border: 0px;
+    text-align: center;
+    padding: 1rem 0;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 5rem;
+  }
+  .tabs-md .tabbar {
+    background: #3a94e1 !important;
+  }
+}
+
+.alert {
+  &-wrapper {
+    // border-radius: 12px;
+    opacity: 0.9;
+    border: 0px;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 5px !important;
+    max-width: 400px !important;
+    margin: 0 auto;
+  }
+}
+
+html[dir="rtl"].toast {
+  &-message {
+    font-family: $font_cairo;
+  }
+}
+
+html[dir="rtl"] input {
+  text-align: right;
+  font-family: $font_cairo;
+}
+
+.button, .button.activated{
+	box-shadow: none !important;
+}

@@ -1,0 +1,93 @@
+page-checkout-addresses {
+  .header {
+    &::after {
+      background-image: none !important;
+    }
+    .toolbar-background {
+      background: $color_white;
+    }
+    .categories-header {
+      color: $color_dark;
+      background: $color_white;
+      padding: 2.4rem 0.4rem;
+      button {
+        background: transparent;
+        box-shadow: none;
+      }
+      span[class^="icon"] {
+        color: $color_dark;
+        font-size: 3rem;
+      }
+    }
+  }
+  .categories {
+    &>.scroll-content {
+      background: linear-gradient(to top, #f2f2f2, $color_white);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 2.5rem 1.5rem;
+    }
+    &-title {
+      color: #454F63;
+      font-family: $font_montserrat;
+      font-weight: bolder;
+      text-align: left;
+      font-size: 4.3rem;
+      margin-bottom: 2.2rem;
+    }
+    .category {
+      min-height: 20rem;
+      border-radius: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 2.4rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: linear-gradient(to top, rgba($color_dark, 0.36), rgba($color_dark, 0.36)), url('../../assets/imgs/card-3.jpg');
+      &:nth-of-type(1) {
+        background-image: linear-gradient(to top, rgba($color_dark, 0.36), rgba($color_dark, 0.36)), url('../../assets/imgs/card-1.jpg');
+      }
+      &:nth-of-type(2) {
+        background-image: linear-gradient(to top, rgba($color_dark, 0.36), rgba($color_dark, 0.36)), url('../../assets/imgs/card-2.jpg');
+      }
+      &-name,
+      &-productsNumber {
+        font-family: $font_montserrat;
+        line-height: 2rem;
+      }
+      &-name {
+        font-weight: bolder;
+        font-size: 3.2rem;
+        color: $color_white;
+        letter-spacing: 0;
+      }
+      &-productsNumber {
+        font-size: 1.86rem;
+        font-weight: 300;
+        color: rgba($color_white, 0.72);
+      }
+      &:not(:last-of-type) {
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+}
+
+html[dir="rtl"] page-checkout-addresses {
+  .categories {
+    &-title {
+      font-family: $font_cairo;
+      text-align: right;
+    }
+    .category {
+      &-name,
+      &-productsNumber {
+        font-family: $font_cairo;
+      }
+    }
+  }
+}

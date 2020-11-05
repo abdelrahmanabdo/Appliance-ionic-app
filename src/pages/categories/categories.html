@@ -1,0 +1,30 @@
+<ion-header no-border>
+  <ion-toolbar class="header-content" no-border>
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="categories">
+  <div *ngIf="categories" class="categories-container">
+
+    <div class="page-title">{{"Products" | translate}}</div>
+    <div *ngFor="let category of categories.children_data" (tap)="GoToCategoriesList(category.id, category.name)" [ngStyle]="{background: 'url('+category.image+') center/cover no-repeat'}"
+      class="category bg-filter">
+
+      <!-- <img  [src]="category.image" /> -->
+      <h4 class="category-name">{{category.name}}</h4>
+      <span class="category-productsNumber">{{category.product_count}} {{'products' | translate}}</span>
+    </div>
+  </div>
+
+
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>

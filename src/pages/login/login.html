@@ -1,0 +1,130 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <div class="auth-header">
+    <button class="auth-btn sign-in active" (tap)="SignIn_page()">{{"sign_in" | translate}}</button>
+    <button class="auth-btn sign-up" (tap)="SingUp_page()">{{"sign_up" | translate}}</button>
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <div [hidden]="!showConfirmationMessage">
+     <span class="text-center text-primary text-uppercase">Thanks for confirming your account you can login now</span>
+  </div>
+  <div class="login-form-container row" [hidden]="!showSignIn">
+    <form [formGroup]="login_form">
+      <ion-item class="form-control">
+        <ion-label floating>{{"email" | translate}} <span class="required">*</span></ion-label>
+        <ion-input type="email" formControlName="email" class="form-control"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of login_validation_messages.email">
+          <div class="error-message" *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item class="form-control">
+        <ion-label floating>{{"Password" | translate}} <span class="required">*</span></ion-label>
+        <ion-input type="password" formControlName="password" class="form-control" required></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of login_validation_messages.password">
+          <div class="error-message" *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty )">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <p class="text-center font-weight-bold text-gray forgot-password" (tap)="ResetPassword()">{{"forget_password" | translate}} ? </p>
+      <button class="btn btn-primary mx-auto" ion-button round outline margin-top type="submit" [disabled]="!login_form.valid" (tap)="login(login_form.value)">{{"login"| translate}}</button>
+      <user-facebook  [userFB]="UsingFacebook" class="loginFacebook" (UserFBEvent)="receiveUserFB($event)" margin-horizontal padding-vertical></user-facebook>
+    </form>
+    <div>
+      <p (tap)="navCtrl.push('TabsPage',{animate: false})" class="text-primary font-weight-bold text-uppercase text-center skip-now">{{"skip_for_now" | translate}}</p>
+    </div>
+  </div>
+  <div class="signupForm" [hidden]="!showSignUp">
+    <div class="signup-form-container">
+      <form [formGroup]="register_form">
+        <ion-item class="form-control">
+          <ion-label floating>{{"first_name" | translate}} <span class="required">*</span></ion-label>
+          <ion-input type="text"  [value]="this.facebookData ? this.facebookData.firstName : '' " formControlName="firstName"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of register_validation_messages.firstName">
+            <div class="error-message" *ngIf="register_form.get('firstName').hasError(validation.type) && (register_form.get('firstName').dirty)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item class="form-control">
+          <ion-label floating>{{"last_name" | translate}} <span class="required">*</span></ion-label>
+          <ion-input type="text" [value]="this.facebookData ? this.facebookData.lastName : '' " formControlName="lastName"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of register_validation_messages.lastName">
+            <div class="error-message" *ngIf="register_form.get('lastName').hasError(validation.type) && (register_form.get('lastName').dirty)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-control">
+          <ion-label floating>{{"email" | translate}} <span class="required">*</span></ion-label>
+          <ion-input type="email" [value]="this.facebookData ? this.facebookData.email : '' " formControlName="email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of register_validation_messages.email">
+            <div class="error-message" *ngIf="register_form.get('email').hasError(validation.type) && (register_form.get('email').dirty)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item class="form-control">
+          <ion-label floating>{{"password" |translate}} <span class="required">*</span></ion-label>
+          <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of register_validation_messages.password">
+            <div class="error-message" *ngIf="register_form.get('password').hasError(validation.type) && (register_form.get('password').dirty )">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item class="form-control">
+          <ion-label floating>{{"confirm_password" | translate}} <span class="required">*</span></ion-label>
+          <ion-input type="password" formControlName="confirm_password"></ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of register_validation_messages.confirm_password">
+            <div class="error-message" *ngIf="register_form.get('confirm_password').hasError(validation.type) && (register_form.get('confirm_password').dirty )">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="validation-errors" >
+            <div class="error-message" *ngIf="register_form.get('confirm_password').touched && register_form.hasError('mismatchedPasswords') && register_form.get('password').valid" >
+                {{"Mismatch password" | translate}}
+            </div>
+        </div>
+        <button class="btn btn-primary mx-auto" ion-button round outline margin-vertical type="submit" [disabled]="!register_form.valid" (tap)="create_account(register_form.value)">{{"create_account" | translate}}</button>
+      </form>
+      <span (tap)="navCtrl.push('TabsPage',{animate: false})" class="text-center text-primary font-weight-bold">{{"cancel" |translate}}</span>
+    </div>
+
+  </div>
+	<ion-row [hidden]="dataAvilable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+
+
+</ion-content>

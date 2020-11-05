@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+    <ion-searchbar id="main_search" (keyup)="searchProducts($event.target.value)" placeholder="{{'search' | translate}}" clearInput></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="filters" no-padding padding-left >
+  <div class="searchResults" [hidden]="!searching">
+    <div>
+      <div *ngIf="searchResult">
+        <div class="searchResults-LinkContainer" *ngIf=" searchResult.total_count > 0 ">
+          <a class="searchResults-Link" *ngFor="let product of searchResult.items" (tap)="navigateToSingleProduct(product.sku)">{{product.name}}</a>
+        </div>
+        <div class="text-primary searchResultsNoResult" *ngIf="searchResult.total_count === 0">
+          {{"there_are_no_results" | translate}} !!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="dataAvailable">
+    <ion-item *ngIf="categories">
+      <ion-label>{{'Category' | translate}}</ion-label>
+      <ion-select [(ngModel)]="dataToFilter.category_id">
+        <ion-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-option>
+        <ion-option  [value]=" " translate="all_items"></ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="brands">
+      <ion-label>{{'Brand' | translate}}</ion-label>
+      <ion-select [(ngModel)]="dataToFilter.product_brand">
+        <ion-option *ngFor="let brand of brands" [value]="brand.brand_id">{{brand.name}}</ion-option>
+        <ion-option [value]=" " >{{'all_items' | translate}}</ion-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{'Rating' | translate}}</ion-label>
+      <ion-select>
+        <ion-option [value]="1">More than 1 </ion-option>
+        <ion-option [value]="2">More than 2</ion-option>
+        <ion-option [value]="3">More than 3</ion-option>
+        <ion-option [value]="4">More than 4</ion-option>
+        <ion-option >{{'all_items' | translate}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{'price' | translate}}</ion-label>
+      <ion-input type="number" [(ngModel)]="dataToFilter.minPriceSelected" placeholder="min"></ion-input>
+      <ion-input type="number" [(ngModel)]="dataToFilter.maxPriceSelected" placeholder="max"></ion-input>
+      <span>EGP</span>
+    </ion-item>
+
+    <ion-item class="filter-btn" padding-right>
+      <button class="btn btn-outline-white btn-block text-uppercase" (tap)="filter()">{{'Filter' | translate}}</button>
+      <span class="filter-reset text-uppercase" (tap)="reset_filter()">{{'Reset filter' | translate}}</span>
+    </ion-item>
+  </div>
+  <ion-row class="preloader" [hidden]="dataAvailable" align-items-center justify-content-center>
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+
+</ion-content>

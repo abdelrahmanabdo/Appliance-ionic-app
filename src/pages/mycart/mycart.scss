@@ -1,0 +1,218 @@
+page-mycart {
+  @include header($color_dark, $color_white, $title: true);
+  .cart-list {
+    &>.scroll-content {
+      background: $color_white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 0 15px 20px 15px;
+    }
+    .card {
+      box-shadow: none;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start; // max-height: 10.2rem;
+      width: 100%;
+      margin: 0;
+      border-bottom: 1px solid #dcdcdd;
+      padding: 10px 0;
+      &-image {
+        width: 8.7rem;
+        height: 8.8rem;
+        flex: 2;
+        img {
+          margin: 0 auto;
+          object-fit: contain;
+        }
+      }
+      &-info {
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+      &-price {
+        font-size: 1.8rem;
+        font-family: $font_montserrat;
+        font-weight: bolder;
+        text-align: left;
+        color: $color_blue;
+        line-height: 1.9rem;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      &-name {
+        font-family: $font_montserrat;
+        font-weight: 500;
+        font-size: 1.6rem;
+        text-align: left;
+        line-height: 1.8rem;
+        color: #78849E;
+        margin: 0;
+      }
+      &-icon {
+        flex: 1;
+        text-align: center;
+        align-self: stretch;
+        justify-content: space-around;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        .icon-wrong {
+          font-size: 2rem;
+        } // .icon-update{
+        // 	font
+        // }
+        .hidden {
+          display: none;
+        }
+        .show {
+          display: block;
+        }
+      }
+      &-quantity {
+        // font-family: $font_montserrat;
+        // font-weight: 500;
+        // font-size: 1.6rem;
+        // text-align: left;
+        // line-height: 1.8rem;
+        // color: #78849E;
+        // margin: 0;
+		display: flex;
+		align-items: stretch;
+		justify-content: flex-start;
+		padding: 0;
+		li{
+			list-style: none;
+			padding: 3px 20px;
+			border: 1px solid $color_dark;
+			font-size: 1.3rem;
+			font-family: $font_montserrat;
+			font-weight: 400;
+			&:nth-child(1), &:nth-child(3){
+				background-color: $color_dark;
+				color: $color_white;
+				ion-icon{
+					font-size: 1rem;
+				}
+			}
+			&:nth-child(1){
+				border-right: 0;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+			}
+			&:nth-child(3){
+				border-left: 0;
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+			}
+		}
+      }
+    }
+    &-totals {
+      ul {
+        margin: 2.6rem 0;
+        padding: 0px;
+        li {
+          list-style: none;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          h4,
+          p {
+            margin: 0;
+            font-family: $font_montserrat;
+            line-height: 1.9rem;
+          }
+          h4 {
+            color: #2A2E43;
+            text-align: left;
+            font-weight: 800;
+            text-transform: capitalize;
+            font-size: 1.5rem;
+          }
+          h6 {
+            margin: 0;
+            font-family: $font_montserrat;
+            color: #2A2E43;
+            line-height: 1.9rem;
+            font-size: 1.3rem;
+          }
+          p {
+            text-align: right;
+            font-weight: 400;
+            // text-transform: uppercase;
+            font-size: 1.4rem;
+			color: #78849E;
+          }
+          &:not(:last-of-type) {
+            margin-bottom: 1.6rem;
+          }
+          &:last-of-type {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            p {
+              font-size: 2.3rem;
+              line-height: 2.8rem;
+              text-align: left;
+              font-weight: bolder;
+              color: $color_blue;
+            }
+          }
+        }
+      }
+    }
+    .btn {
+      padding: 1.8rem 7rem;
+      width: 100%;
+    }
+  }
+}
+
+html[dir="rtl"] page-mycart {
+	.header-content{
+		flex-direction: row-reverse;
+	}
+  .cart-list {
+    .card {
+      &-price {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+      &-name {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+      &-quantity {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+    }
+    &-totals {
+      ul {
+        li {
+          h4,
+          p {
+            font-family: $font_cairo;
+          }
+          h4 {
+            text-align: right;
+          }
+          p {
+            text-align: left;
+          }
+          &:last-of-type {
+            p {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}

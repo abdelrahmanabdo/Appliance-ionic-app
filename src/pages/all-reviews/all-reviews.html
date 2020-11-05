@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="reviews">
+  <h4 class="reviews-title">{{"reviews" | translate}}</h4>
+  <ion-card class="review-card" *ngFor="let review of allReviews">
+    <div class="review-info">
+	  <div class="review-info-user">
+		<div>
+			<div class="review-name">{{review.nickname}}</div>
+			<div class="review-date">{{review.created_at}}</div>
+		</div>
+		<rating [(ngModel)]="review.rating_votes[0].value" readOnly="true" max="5" ></rating>
+	  </div>
+    </div>
+    <div class="review-text">{{review.detail}}</div>
+  </ion-card>
+  <button (tap)="navigateToAddReview(allReviews[0].entity_pk_value)" class="addresses-addNew">{{'Add new review' | translate}}</button>
+
+
+  <ion-row [hidden]="dataAvilable" align-items-center justify-content-center class="preloader">
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>
+

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="order-details">
+    <div class="page-title">{{"Add Review" | translate}}</div>
+
+    <div class="order">
+      <div class="order-head">
+        <img [src]="productImage" class="order-image" alt="order image">
+        <div class="order-info">
+          <h3 class="ord  er-name">{{productName}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="order-details-review">
+      <div class="order-details-review-rating">
+        <h3 class="rating-title text-capitalize text-dark font-weight-regular">rating</h3>
+        <rating  class="detailsValue" [(ngModel)]="rating" max="5" emptyStarIconName="star-outline"
+        halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+      </div>
+      <ion-input type="text" placeholder=" Your nickname" [(ngModel)]="nickname" *ngIf="!isLoggedIn"></ion-input>
+      <ion-textarea aria-placeholder="Add review" placeholder="add review" [(ngModel)]="review">Add review</ion-textarea>
+      <button ion-button class="btn btn-primary text-uppercase text-white font-weight-bold mx-auto btn-block" [disabled]=" !review" (tap)="addReview()"> ADD REVIEW </button>
+    </div>
+    
+  <ion-row [hidden]="dataAvilable" align-items-center justify-content-center class="preloader">
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+
+</ion-content>

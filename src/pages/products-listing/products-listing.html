@@ -1,0 +1,60 @@
+<ion-header>
+	<ion-toolbar class="header-content">
+		<button ion-button menuToggle end>
+			<span class="icon-menu"></span>
+		</button>
+		<button (tap)="back()" ion-button start>
+			<span class="icon-back"></span>
+		</button>
+	</ion-toolbar>
+</ion-header>
+	
+<ion-content class="products">
+	<div class="page-title">{{title}}</div>
+	<h6 *ngIf="products" class="page-subtitle">{{productsCount}} {{'items' | translate}}</h6>
+	<div class="page-sort-filter">
+		<a class="sortBy" (tap)="sortBy()">{{'Sort by' | translate}}</a>
+		<a class="filter" (tap)="navigateToFilter()">{{'Filter' | translate}}</a>
+	</div>
+	<div *ngIf="products" style="display: flex;flex-direction: column; align-items: center;justify-content: center;">
+	<!-- <nav>
+		<a *ngFor="let category of categories.children_data ">
+			<a style="text-decoration:none" class="btn btn-default" *ngIf="(category.is_active == true)" (tap)="getCategoryData(category.id)"  >{{category.name}}  </a>
+		</a>
+	</nav> -->
+		<ion-card class="product-card" *ngFor="let product of products"  >
+			<div class="product-body" >
+				<img class="product-image" *ngIf="product.thumbnail != undefined" (tap)="navigateToSingleProduct(product.type_id,product.sku)" [src]="server_base_image_url+ product.thumbnail"/>
+				<img class="product-image" *ngIf="product.thumbnail == undefined" (tap)="navigateToSingleProduct(product.type_id,product.sku)" src="assets/imgs/product.png"/>		
+				<div class="product-info">
+					<div class="product-name" (tap)="navigateToSingleProduct(product.type_id,product.sku)">{{product.name | slice:0:40}} <span *ngIf="product.name.length >= 40">...</span></div>
+				<div class="product-price" [style.margin-top]="product.special_price == undefined ? '0' : '2rem'" [style.display]="product.type_id === 'configurable' ? 'none':'block'"> 
+					<p  class="product-price-off text-gray font-weight-bold" *ngIf="product.special_price != undefined" > {{ product.price*currencyRate |number :'1.0' }} <span >       {{currency}}</span> </p>
+					<p >{{ (product.special_price ? product.special_price*currencyRate : product.price*currencyRate) |number :'1.0'}} <span >       {{currency}}</span></p>
+				</div>
+				<rating [(ngModel)]="product.rating" readOnly="true" max="5" nullable="false"></rating>
+			</div>
+			<span class="product-sale"  *ngIf="product.special_price != undefined" >
+					{{ ( ((product.special_price /  product.price)-1) * -100) | number : '1.0-0'  }}% {{'off' | translate}}
+				</span>
+			</div>
+			<div class="product-footer">
+				<button (tap)="homeAddTocart(product.sku)"><span class="icon-cart"></span>{{"add_to_cart" | translate}}</button>
+				<button (tap)="share(product.url_key , product.image , product.sku)"><span class="icon-share"></span>{{"share" | translate}}</button>
+				<!-- <button (tap)="addToWishlist(product.id )" [class]="'add'+-product.id" ><span class="icon-heart" ></span>{{"add_to_wishlist" | translate}}</button> -->
+				<!-- <button (tap)="removeFromWishlist(product.id )" [class]="'remove'+-product.id" [hidden]="removeWishlistToggle"><span class="icon-heart" ></span> {{"remove_from_wishlist" | translate}}</button> -->
+				<button (tap)="addToWishlist(product.id )" [class]="'add'+-product.id"><span class="icon-heart"></span>{{"add_to_wishlist" | translate}}</button>
+				<button (tap)="removeFromWishlist(product.id )" [ngClass]="['remove'+-product.id, 'remove-from-wishlist']" [hidden]="removeWishlistToggle"><ion-icon name="heart"></ion-icon> {{"remove_from_wishlist" | translate}}</button>
+			  </div>
+		</ion-card>
+
+		<div [hidden]="!(this.products.length == 0)">
+				<h4 class="text-gray text-center">{{'There are no items' | translate}}</h4>
+	    </div>
+	</div>
+	<ion-row [hidden]="dataAvilable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+<!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
+</ion-content>
+

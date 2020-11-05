@@ -1,0 +1,113 @@
+page-my-orders {
+  @include header($color_white, $color_dark);
+  .my-orders {
+    &>.scroll-content {
+      background: linear-gradient(to top, #f2f2f2, $color_white);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 2rem 1.5rem;
+    }
+    .order {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0px 0.5333rem 2rem rgba(#455B63, 0.2) !important;
+      width: 100%;
+      border-radius: 1.2rem;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      background-color: $color_white;
+      &:first-of-type {
+        margin-top: 1.5rem;
+      }
+      &-image {
+        width: 8.7rem;
+        height: 8.8rem;
+      }
+      &-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 1.6rem;
+      }
+      &-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.9rem 1.6rem;
+        position: relative;
+        span {
+          font-family: $font_montserrat;
+          font-size: 1.5rem;
+          text-align: left;
+          line-height: 1.7rem;
+        }
+        &::before {
+          content: '';
+          width: 90%;
+          height: 1px;
+          display: block;
+          background-color: #F4F4F6;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+      &-name {
+        padding-left: 1.4rem;
+        font-family: $font_montserrat;
+        font-weight: 500;
+        text-align: left;
+        line-height: 2rem;
+        color: #78849E;
+        text-transform: capitalize;
+      }
+      &-status {
+        color: #78849E;
+        font-family: $font_montserrat;
+        font-weight: bolder;
+        text-align: right;
+        line-height: 1.3rem;
+        font-size: 1.4rem;
+        text-transform: capitalize;
+        margin: 0;
+      }
+    }
+  }
+}
+
+html[dir="rtl"] page-my-orders {
+  .header-content {
+    flex-direction: row-reverse;
+  }
+  .toolbar-content {
+    text-align: left;
+  }
+  .my-orders {
+    .order {
+      &-footer {
+        span {
+          font-family: $font_cairo;
+          text-align: right;
+        }
+        &::before {
+          left: initial;
+          right: 50%; //   transform: translateX(-50%);
+        }
+      }
+      &-name {
+        padding-left: 0;
+        padding-right: 1.4rem;
+        font-family: $font_cairo;
+        text-align: right;
+      }
+      &-status {
+        font-family: $font_cairo;
+        text-align: left;
+      }
+    }
+  }
+}

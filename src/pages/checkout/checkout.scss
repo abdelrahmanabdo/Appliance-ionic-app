@@ -1,0 +1,299 @@
+page-checkout {
+  @include header($color_dark, $color_white, $title: true);
+  .checkout-content {
+    &>.scroll-content {
+      background: $color_white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 1rem 1.5rem;
+    }
+    .addresses {
+      h3 {
+        font-size: 1.6rem;
+        text-align: left;
+        font-family: $font_montserrat;
+        font-weight: 600;
+        line-height: 1.5rem;
+        color: #000;
+        margin: 0.5rem 0;
+        &:last-of-type {
+          margin-bottom: 1.4rem;
+        }
+      }
+    }
+    .change-address {
+      background-color: $color_white;
+      font-size: 1.2rem;
+      text-align: left;
+      line-height: 1.5rem;
+    }
+  }
+  @include header($color_dark, $color_white, $title: true);
+  .cart-list {
+    &>.scroll-content {
+      background: $color_white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 2rem 1.5rem;
+    }
+    .card {
+      box-shadow: none;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-start; // max-height: 10.2rem;
+      width: 100%;
+      margin: 0;
+      border-bottom: 1px solid #dcdcdd;
+      padding: 1rem 0;
+      &-image {
+        width: 8.7rem;
+        height: 8.8rem;
+        flex: 2;
+        img {
+          margin: 0 auto;
+          object-fit: contain;
+        }
+      }
+      &-info {
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+      }
+    //   &-price {
+    //     font-size: 1.8rem;
+    //     font-family: $font_montserrat;
+    //     font-weight: bolder;
+    //     text-align: left;
+    //     color: $color_blue;
+    //     line-height: 1.9rem;
+    //     text-transform: uppercase;
+    //     margin: 0;
+    //   }
+      &-name, &-price {
+        font-family: $font_montserrat;
+        font-weight: 500;
+        font-size: 1.6rem;
+        text-align: left;
+        line-height: 1.8rem;
+        color: #78849E;
+        margin: 0;
+      }
+      &-icon {
+        flex: 1;
+        text-align: center;
+        align-self: stretch;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        .icon-wrong {
+          font-size: 2rem;
+        }
+      }
+      &-quantity {
+        font-family: $font_montserrat;
+        font-weight: 500;
+        font-size: 1.6rem;
+        text-align: left;
+        line-height: 1.8rem;
+        color: #78849E;
+        margin: 0;
+      }
+    }
+    &-totals {
+      ul {
+        margin: 2.6rem 0;
+        padding: 0px;
+        li {
+          list-style: none;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          h4,
+          p {
+            margin: 0;
+            font-family: $font_montserrat;
+            color: #2A2E43;
+            line-height: 1.9rem;
+            font-size: 1.6rem;
+          }
+          h4 {
+            text-align: left;
+            font-weight: 800;
+            text-transform: capitalize;
+          }
+          p {
+            text-align: right;
+            font-weight: 400;
+            text-transform: capitalize;
+          }
+          &:not(:last-of-type) {
+            margin-bottom: 1.6rem;
+          }
+          &:last-of-type {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            p {
+              font-size: 2.3rem;
+              line-height: 2.8rem;
+              text-align: left;
+              font-weight: bolder;
+              color: $color_blue;
+            }
+          }
+        }
+      }
+    }
+    .btn {
+      padding: 1.8rem 7rem;
+      width: 100%;
+    }
+  }
+  .shipping-address {
+    display: flex;
+    flex-direction: column;
+    .sec-title {
+      margin-bottom: 0px;
+    }
+    &-form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .form-control {
+    padding: 0px;
+    .label {
+      color: #000000;
+      font-size: 1.5rem;
+      text-align: left;
+      font-family: $font_montserrat;
+      font-weight: bold;
+    }
+  }
+  .apply-coupon {
+    margin-top: 2rem;
+  }
+  .shippingMethod {
+    display: flex;
+    flex-direction: column;
+    .method {
+      margin: 0;
+      padding: 0px;
+      .item {
+        padding: 0 !important; // border-bottom: 1px solid #C7C7CC;
+        &-inner {
+          flex-direction: row-reverse;
+          .radio {
+            margin-right: 2.5rem;
+            &-icon {
+              width: 22px;
+              height: 22px;
+              border-color: #E5E5EA;
+            }
+            &-inner {
+              width: 80%;
+              height: 80%;
+            }
+          }
+          .label {
+            font-family: $font_montserrat;
+            font-weight: 600;
+            font-size: 1.7rem;
+            line-height: 2rem;
+            text-align: left;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+
+html[dir="rtl"] page-checkout {
+  .header-content {
+    flex-direction: row-reverse;
+  }
+  .toolbar-content {
+    text-align: left;
+  }
+  .checkout-content {
+    .addresses {
+      h3 {
+        text-align: right;
+        font-family: $font_cairo;
+      }
+    }
+    .change-address {
+      text-align: right;
+    }
+  }
+  .cart-list {
+    .card {
+      &-price {
+        font-size: 1.8rem;
+        font-family: $font_cairo;
+        text-align: right;
+      }
+      &-name {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+      &-quantity {
+        font-family: $font_cairo;
+        text-align: right;
+      }
+    }
+    &-totals {
+      ul {
+        li {
+          h4,
+          p {
+            font-family: $font_cairo;
+          }
+          h4 {
+            text-align: right;
+          }
+          p {
+            text-align: left;
+          }
+          &:last-of-type {
+            p {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+  .form-control {
+    .label {
+      text-align: right;
+      font-family: $font_cairo;
+    }
+  }
+  .selected {
+    border: 1px solid blue;
+  }
+  .shippingMethod {
+    .method {
+      .item {
+        &-inner {
+          .radio {
+            margin-right: 0;
+            margin-left: 2.5rem;
+          }
+          .label {
+            font-family: $font_cairo;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

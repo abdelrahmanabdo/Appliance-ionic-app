@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <ion-title>payment method</ion-title>
+    <button (tap)="back()"   ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="payment-content">
+  <h5 class="sec-title">Payment Method</h5>
+  <div *ngIf="paymentMethods">
+    <div *ngFor="let method of paymentMethods">
+      <ion-list radio-group [(ngModel)]="selectedPaymentMethod" class="method">
+        <ion-item>
+          <ion-label>{{method.title}}</ion-label>
+          <ion-radio [value]="method.code"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <div style="padding-right: 1.5rem;">
+	<button class="btn btn-primary btn-block" (tap)="continue_to_payment()" [disabled]="!selectedPaymentMethod">Continue to payment</button>
+
+  </div>
+  <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+		<img src="assets/imgs/preloader.gif">
+	</ion-row>
+</ion-content>

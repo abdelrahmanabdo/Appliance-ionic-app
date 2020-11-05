@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar class="categories-header">
+
+      <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+   
+    <button ion-button end (tap)="submitAddress()"  class="text  text-primary" style="float: right;">
+        Done
+    </button>
+     
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content class="categoires">
+    <div class="categories-title">Change address</div>
+    <div *ngIf="userAdresses">
+      <div *ngIf="userAdresses.length > 0 ">
+          <ion-list radio-group [(ngModel)]="selectedAddress">
+              <ion-item *ngFor="let add of userAdresses ; let index = index" >
+                <ion-radio [value]="add" [checked]="add.id == billingAddressId" ></ion-radio>
+                <ion-label>              
+                  <span>Shipping address {{index+1}}</span>
+                  <h6>{{add.street[0]}}</h6>
+                  <h6>{{add.region.region}}</h6>
+                  <h6>{{add.city}}</h6>
+                </ion-label>
+              </ion-item>
+
+        </ion-list>
+      </div>
+      <div *ngIf="userAdresses.length == 0">
+        
+      </div>
+    </div>
+    <ion-row [hidden]="dataAvaliable" align-items-center justify-content-center class="preloader">
+      <img src="assets/imgs/preloader.gif">
+    </ion-row>
+
+</ion-content>

@@ -1,0 +1,109 @@
+menu-list {
+  .side-menu {
+    &-header {
+      .toolbar-content,
+      .toolbar-content-ios {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 1.1rem;
+        padding-bottom: 1.1rem;
+        .toolbar-title,
+        .toolbar-title-ios {
+          text-align: left;
+          font-family: $font_montserrat;
+          font-size: 4rem;
+          font-weight: 600;
+          line-height: 5.4rem;
+        }
+      }
+      span.icon-back {
+        font-size: 2.5rem;
+      }
+      .toolbar-content-ios {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+        .toolbar-title-ios {
+          padding-top: 15px !important;
+        }
+      }
+      &::after {
+        background: none;
+      }
+    }
+    &-item {
+      padding: 0rem 0rem 1.2rem 1.6rem;
+      .label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 0px;
+        p {
+          color: $color_dark;
+          font-family: $font_montserrat;
+          font-weight: 400;
+          font-size: 1.7rem;
+          text-transform: capitalize;
+          text-align: left;
+        }
+        span[class="arrow"] {
+          color: $color_blue;
+          font-weight: 600;
+          font-size: 1.7rem;
+        }
+      }
+      &:first-of-type {
+        margin-top: 23px;
+      }
+    }
+    &-item.item-ios {
+      &:first-of-type {
+        margin-top: 30px !important;
+        border-top: 0 !important;
+      }
+      &:last-of-type {
+        border-bottom: 0 !important;
+      }
+      .item-inner {
+        padding-right: 16px !important;
+        .label {
+          margin: 0 !important;
+          color: $color_dark;
+          font-family: $font_montserrat;
+          font-weight: 500;
+          font-size: 1.7rem;
+          text-transform: capitalize;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+html[dir="rtl"] menu-list {
+  .side-menu {
+    &-header {
+      button,
+      button.button-md {
+        transform: rotate(180deg);
+      }
+      .toolbar-content {
+        .toolbar-title {
+          text-align: right;
+          font-family: $font_cairo;
+        }
+      }
+    }
+    &-item {
+      padding: 0rem 1.6rem 1.2rem 0;
+      .label {
+        font-family: $font_cairo;
+        p {
+          text-align: right !important;
+        }
+      }
+    }
+  }
+}

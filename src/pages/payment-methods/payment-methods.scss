@@ -1,0 +1,74 @@
+page-payment-methods {
+  @include header($color_dark, $color_white, $title: true);
+  .payment-content {
+    &>.scroll-content {
+      background: $color_white;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 1rem 0 1rem 1.5rem;
+    }
+    .method {
+      margin: 0;
+      .item {
+        padding: 0 !important;
+        border-bottom: 1px solid #C7C7CC;
+        &-inner {
+          flex-direction: row-reverse;
+          .radio {
+            margin-right: 2.5rem;
+            &-icon {
+              width: 22px;
+              height: 22px;
+              border-color: #E5E5EA;
+            }
+            &-inner {
+              width: 80%;
+              height: 80%;
+            }
+          }
+          .label {
+            font-family: $font_montserrat;
+            font-weight: 600;
+            font-size: 1.7rem;
+            line-height: 2rem;
+            text-align: left;
+            color: #000;
+          }
+        }
+      }
+    }
+    .btn {
+      margin-top: 3rem;
+    }
+  }
+}
+
+html[rtl="rtl"] page-payment-methods {
+	.header-content {
+	  flex-direction: row-reverse;
+	}
+
+	.toolbar-content {
+	  text-align: left;
+	}
+  .payment-content {
+	  &>.scroll-content{
+		  padding: 1rem 1.5rem 1rem 0rem !important;
+	  }
+    .method {
+      .item {
+        &-inner {
+          .radio {
+            margin-right: 0;
+            margin-left: 2.5rem;
+          }
+          .label {
+            font-family: $font_cairo;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the SuccessfulPaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Payment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="successfull">
+    <div class="confirm-head">
+      <div class="confirm-head-icon">
+        <h3>
+          <span class="fas fa-check"></span>ORDER CONFIRMED SUCCESSFULLY</h3>
+      </div>
+      <p class="confirm-head-text">Your payment is confirmed and the order is done successfully , You can track your order from my orders page in your profile</p>
+    </div>
+    <div class="confirm-body">
+      	<div >
+            <span >order Status</span>
+            <span>{{orderDetails?.status}}</span>
+      </div>
+      <div>
+        <span>order no</span>
+        <span class="order-details-info-val">{{orderDetails?.increment_id}}</span>
+      </div>
+      <div>
+        <span>shipping fees</span>
+        <span class="order-details-info-val">{{orderDetails?.shipping_amount}} {{orderDetails?.base_currency_code}}</span>
+      </div>
+      <div>
+        <span>14% VAT</span>
+        <span class="order-details-info-val">{{orderDetails?.shipping_tax_amount}} {{orderDetails?.base_currency_code}}</span>
+      </div>
+      <div>
+        <span>unit price</span>
+        <span class="order-details-info-val">{{orderDetails?.subtotal}} {{orderDetails?.base_currency_code}}</span>
+      </div>
+      <div>
+
+        <span>order total</span>
+        <span class="order-details-info-val">{{orderDetails?.grand_total}} {{orderDetails?.base_currency_code}}</span>
+      </div>
+    </div>
+    <h3 class="confirm-orders" (tap)="navigateToOrders()"*ngIf="isLoggedIn">my orders</h3>
+
+  </div>
+  <!-- <div class="faild">
+    <div class="faild-head">
+      <div class="faild-head-icon">
+        <h3><span class="fas fa-times"></span>request failed</h3>
+      </div>
+      <p class="faild-head-text">We are terribly sorry the request is unsuccessful Please check you bank account and try again</p>
+    </div>
+    <div class="faild-try-again">try again</div>
+  </div> -->
+</ion-content>

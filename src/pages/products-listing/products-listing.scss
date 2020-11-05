@@ -1,0 +1,204 @@
+page-products-listing {
+  @include header($color_white, $color_dark); // .account-info {
+
+  .products {
+    &>.scroll-content {
+      background: linear-gradient(to top, #f2f2f2, $color_white);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 0rem 1.5rem;
+    }
+  }
+  .product {
+    &-card {
+      display: inline-block;
+      box-shadow: 0px 0.5333rem 2rem rgba(#455B63, 0.2) !important;
+      width: 100%;
+      border-radius: 12px !important;
+      padding: 0;
+      &:not(:last-of-type) {
+        margin-bottom: 1.6rem;
+      }
+    }
+    &-sale {
+      top: 0;
+      right: 0;
+      width: 6rem;
+      height: 2.6rem;
+      background: $color_blue;
+      color: $color_white;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font_montserrat;
+      font-weight: bold;
+      font-size: 1rem;
+      border-top-right-radius: 1.2rem;
+      border-bottom-left-radius: 1.2rem; // padding: 0 1rem;
+    }
+    &-body {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    &-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      padding: 0;
+      font-size: 10px;
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        background-color: $color_white;
+        color: #78849E;
+        font-family: $font_montserrat;
+        font-weight: 600;
+        font-size: 1em;
+        text-transform: capitalize;
+        padding: 2rem 0rem 1.5rem;
+		&.remove-from-wishlist {
+		  color: $color_blue !important;
+		  ion-icon {
+		    font-size: 2rem;
+		    margin-right: 5px;
+		  }
+		}
+        span[class^="icon-"] {
+          font-size: 1.6rem;
+          margin-right: 0.5rem;
+        }
+        &:last-of-type {
+          flex: 1.2;
+        }
+      }
+      &::before {
+        content: '';
+        height: 1px;
+        width: 80%;
+        margin: 1rem auto;
+        background: #f4f4f4;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    &-image {
+      height: 100%;
+      width: 80px;
+      object-fit: cover;
+    }
+    &-img-container {
+      flex: 1;
+    }
+    &-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1.6rem;
+      flex: 3;
+    }
+    &-name {
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-align: left;
+      font-family: $font_montserrat;
+      line-height: 2rem;
+      white-space: pre-wrap;
+      color: #78849E;
+    }
+    &-price {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0 0;
+      p {
+        font-family: $font_montserrat;
+        font-weight: bold;
+        font-size: 1.6rem;
+        color: $color_blue;
+        line-height: 1.6rem;
+        &:not(:last-of-type) {
+          margin-right: 1.5rem;
+        }
+      }
+      &-off {
+        text-decoration: line-through;
+        font-size: 1.2rem !important;
+      }
+    }
+  }
+  rating {
+    .rating {
+      padding: 0;
+    }
+  }
+  .sortBy {
+    float: left;
+  }
+  .filter {
+    float: right;
+  }
+}
+
+html[dir="rtl"] page-products-listing {
+  @include header($color_white, $color_dark);
+  .header-content {
+    flex-direction: row-reverse;
+  }
+
+  .toolbar-content {
+    .button {
+      float: left;
+    }
+  }
+  .products {
+    .product {
+      &-footer {
+        button {
+          font-family: $font_cairo;
+          span[class^="icon-"] {
+            margin-right: 0;
+            margin-left: 0.5rem;
+          }
+        }
+        &::before {
+          left: initial;
+          right: 50%;
+        }
+      }
+      &-name {
+        text-align: right;
+        font-family: $font_cairo;
+      }
+      &-price {
+        p {
+          font-family: $font_cairo;
+          &:not(:last-of-type) {
+            margin-right: 0;
+            margin-left: 1.5rem;
+          }
+        }
+      }
+	}
+    .sortBy {
+	  float: right;
+	  font-family: $font_cairo;
+    }
+    .filter {
+	  float: left;
+	  font-family: $font_cairo;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+page-welcome {
+  .content {
+    background: url('../assets/imgs/Welcome.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .welcome-intro {
+    text-align: center;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      margin-top: 10vh;
+      color: $color_white;
+      font-size: 5rem;
+      font-weight: bold;
+      line-height: 1;
+      width: 75%;
+	  margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.4rem;
+      font-weight: normal;
+      color: rgba($color_white, 0.75);
+	  width: 75%;
+	  margin: 0 auto;
+    }
+  }
+  .welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    button {
+      margin-bottom: 1.6rem;
+    }
+  }
+  user-facebook {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .welcome-buttons p,
+  .skipForNow {
+    font-family: $font_montserrat;
+    font-size: 1.3rem;
+  }
+}
+
+html[dir="rtl"] page-welcome {
+  .welcome-buttons p,
+  .skipForNow {
+    font-family: $font_cairo;
+  }
+}

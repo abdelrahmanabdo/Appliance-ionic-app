@@ -1,0 +1,8 @@
+page-support {
+    @include header($color_white, $color_dark);
+    .page {
+        &-title {
+            font-size: 3re
+        }
+    }
+}

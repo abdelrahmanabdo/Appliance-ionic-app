@@ -1,0 +1,269 @@
+page-add-review {
+    @include header($color_white, $color_dark);
+    .order-details {
+      &>.scroll-content {
+        background: linear-gradient(to top, #f2f2f2, $color_white);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 2rem 1.5rem;
+      }
+      .order {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0.5333rem 2rem rgba(#455B63, 0.2) !important;
+        width: 100%;
+        border-radius: 1.2rem;
+        padding: 0;
+        margin: 1.5rem 0 1.5rem 0;
+        background-color: $color_white;
+        &-head {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 1rem 1.6rem;
+        }
+        &-image {
+          max-width:20%;
+        }
+        &-footer {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.9rem 1.6rem;
+          position: relative;
+          span {
+            text-align: left;
+            line-height: 1.7rem;
+            font-size: 1.5rem;
+          }
+          &::before {
+            content: '';
+            width: 90%;
+            height: 1px;
+            display: block;
+            background-color: #F4F4F6;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+        &-info {
+          padding-left: 1.4rem;
+        }
+        &-name {
+          font-family: $font_montserrat;
+          font-weight: normal;
+          text-align: left;
+          line-height: 2rem;
+          color: #78849E;
+          text-transform: capitalize;
+          margin-bottom: 0;
+        }
+      }
+      &-info {
+        padding: 0px;
+        margin: 1.6rem 0 5rem;
+        li {
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 1.6rem 0;
+          padding: 0 1rem;
+          &.active {
+            box-shadow: 0px 0.5333rem 2rem rgba(#455B63, 0.2) !important;
+            width: 100%;
+            border-radius: 1.2rem;
+            padding: 1.8rem 1rem;
+            margin: 0 0 1.5rem 0;
+            background-color: $color_white;
+          }
+        }
+        &-val,
+        &-title {
+          font-size: 1.5rem;
+          font-family: $font_montserrat;
+          line-height: 1.9rem;
+          color: #2A2E43;
+          margin: 0;
+          text-transform: capitalize;
+        }
+        &-title {
+          font-size: 1.7rem;
+          text-align: left;
+          font-weight: bolder;
+        }
+        &-val {
+          font-weight: 400;
+          text-align: right;
+        }
+      }
+      &-review {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        .reviews-title {
+          font-family: $font_montserrat;
+          font-weight: bolder;
+          font-size: 1.4rem;
+          color: rgba(#78849E, 0.56);
+          line-height: 1.4rem;
+          text-align: left;
+        }
+        &-rating {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: relative;
+          h3 {
+            font-family: $font_montserrat;
+            font-weight: 500;
+            text-align: left;
+            line-height: 2rem;
+            color: $color_dark;
+          }
+          &::after {
+            content: '';
+            height: 1px;
+            width: 130%;
+            position: absolute;
+            bottom: 0;
+            right: -1.6rem;
+            left: 0rem;
+            background-color: #C7C7CC;
+          }
+        }
+        ion-textarea {
+          max-height: 8.7rem;
+          margin-bottom: 3.3rem;
+          position: relative;
+          &::-moz-placeholder {
+            opacity: 1 !important;
+            color: $color_darkGray;
+            font-size: 1.7rem;
+          }
+          &::-ms-placeholder {
+            opacity: 1 !important;
+            color: $color_darkGray;
+            font-size: 1.7rem;
+          }
+          &::placeholder {
+            opacity: 1 !important;
+            color: $color_darkGray;
+            font-size: 1.7rem;
+          }
+          &::after {
+            content: '';
+            height: 1px;
+            width: 130%;
+            position: absolute;
+            bottom: 0;
+            right: -1.6rem;
+            left: 0rem;
+            background-color: #C7C7CC;
+          }
+        }
+      }
+    }
+    rating {
+      .rating {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        li {
+          padding: 0rem 0.3rem !important;
+          font-size: 2rem;
+          &:first-of-type {
+            padding-left: 0px !important;
+          }
+          &:last-of-type {
+            padding-right: 0px !important;
+          }
+          .icon {
+            color: #FFB900;
+          }
+        }
+      }
+    }
+  }
+  
+  html[dir="rtl"] page-order-details {
+    .order-details {
+      .order {
+        &-footer {
+          span {
+            text-align: right;
+          }
+          &::before {
+            left: initial;
+            right: 50%; //   transform: translateX(-50%);
+          }
+        }
+        &-info {
+          padding-left: 0;
+          padding-right: 1.4rem;
+        }
+        &-name {
+          font-family: $font_cairo;
+          text-align: right;
+        }
+      }
+      &-info {
+        &-val,
+        &-title {
+          font-family: $font_cairo;
+        }
+        &-title {
+          text-align: right;
+        }
+        &-val {
+          text-align: left;
+        }
+      }
+      &-review {
+        .reviews-title {
+          font-family: $font_cairo;
+          text-align: right;
+        }
+        &-rating {
+          h3 {
+            font-family: $font_cairo;
+            text-align: right;
+          }
+          &::after {
+            right: 0;
+            left: -1.6rem;
+          }
+        }
+        ion-textarea {
+          &::after {
+            right: 0rem;
+            left: -1.6rem;
+          }
+        }
+      }
+    }
+    rating {
+      .rating {
+        li {
+          &:first-of-type {
+            padding-left: 0 !important;
+            padding-right: 0px !important;
+          }
+          &:last-of-type {
+            padding-right: 0 !important;
+            padding-left: 0px !important;
+          }
+        }
+      }
+    }
+}

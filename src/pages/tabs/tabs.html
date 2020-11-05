@@ -1,0 +1,6 @@
+<ion-tabs >
+  <ion-tab [root]="tab1Root" [tabTitle]="tab1Title"  [tabsHideOnSubPages]="false"                             tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" [tabTitle]="tab2Title"  [tabsHideOnSubPages]="false" [tabBadge]="cartCount"      tabIcon="icon-cart"></ion-tab>
+  <ion-tab [root]="tab3Root" [tabTitle]="tab3Title"  [tabsHideOnSubPages]="false" [tabBadge]="compareCount"   tabIcon="icon-compare"></ion-tab>
+  <ion-tab [root]="tab4Root" [tabTitle]="tab4Title"  [tabsHideOnSubPages]="false" [tabBadge]="wishlistCount"  tabIcon="heart" [enabled]="loggedInUser"></ion-tab>
+</ion-tabs>

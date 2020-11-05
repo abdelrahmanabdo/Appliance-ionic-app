@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar class="header-content">
+    <button ion-button menuToggle end>
+      <span class="icon-menu"></span>
+    </button>
+    <ion-title>{{'compare' | translate}}</ion-title>
+    <button (tap)="back()" ion-button start>
+      <span class="icon-back"></span>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="compare" *ngIf="list">
+    <div class="compare-content" *ngIf="list.length > 0">
+      <div *ngFor="let product of list ; let index = index">
+        <div class="compare-card">
+          <div class="compare-card-icon">
+            <span class="icon-wrong" (tap)="removeFromCompare(index)"></span>
+          </div>
+          <div class="compare-card-image" (tap)="viewProduct(product.sku)">
+            <img [src]="product.image ? server_base_image_url+product.image : 'assets/imgs/product.png'" />
+          </div>
+          <p class="compare-card-name">{{product.name}}</p>
+          <div class="compare-card-info">
+            <div class="compare-card-price">
+              <p>{{'price' | translate}}</p>
+              <p>{{ (product.special_price ? product.special_price*currencyRate : product.price*currencyRate) |number :'1.0'}} {{currency}}
+              </p>
+            </div>
+            <div>
+              <p>{{'Brand' | translate}}</p>
+              <p *ngIf="product.brand">{{product.brand}}</p>
+              <p *ngIf="!product.brand">-</p>
+
+            </div>
+            <!-- <div>
+					<p>{{'sold-by' | translate}}</p>
+					<p>Vendor name</p>
+				</div> -->
+            <div>
+              <p>{{'type' | translate}}</p>
+              <p>smart tv</p>
+            </div>
+            <div>
+              <p>{{'dimensions' | translate}}</p>
+              <p *ngIf="product.ts_dimensions_width && product.ts_dimensions_length">{{ (1 *product.ts_dimensions_length) +'x'+ (1*product.ts_dimensions_width) }} cm</p>
+              <p *ngIf="!product.ts_dimensions_width && !product.ts_dimensions_length">-</p>
+            </div>
+            <div>
+              <p>{{'Weight' | translate}}</p>
+              <p *ngIf="product.weight">{{product.weight }} kg</p>
+              <p *ngIf="!product.weight">-</p>
+            </div>
+            <div>
+              <p>{{'Description' | translate}}</p>
+              <p class="compare-card-description" *ngIf="product.description" [innerHtml]="product.description"></p>
+              <p class="compare-card-description" *ngIf="!product.description">-</p>
+            </div>
+          </div>
+			<button class="btn btn-primary product-addToCart text-uppercase" margin-vertical (tap)="AddTocart(product.sku,1)">
+				<span class="icon-cart"></span>{{'Add to cart' | translate}}
+			</button>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="list.length == 0 ">
+      <h4 class="text-gray text-center">{{'There are no items' | translate}}</h4>
+    </div>
+  </div>
+
+  <ion-row class="preloader" [hidden]="dataAvilable" align-items-center justify-content-center>
+    <img src="assets/imgs/preloader.gif">
+  </ion-row>
+</ion-content>
